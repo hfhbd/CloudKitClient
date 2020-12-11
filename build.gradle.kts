@@ -14,31 +14,30 @@ repositories {
 
 kotlin {
     explicitApi()
+
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
     js(BOTH) {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                }
-            }
-        }
         nodejs()
     }
 
     
     sourceSets {
+        val coroutinesVersion: String by project
         commonMain {
             dependencies {
-                api("io.ktor:ktor-client-cio:1.4.3")
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
-
-                api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:0.0.2")
+                val ktorVersion: String by project
+                api("io.ktor:ktor-client-core:$ktorVersion")
+                val jsonVersion: String by project
+                api("org.jetbrains.kotlinx:kotlinx-serialization-json:$jsonVersion")
+                val dateTimeVersion: String by project
+                api("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                val uuidVersion: String by project
+                api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:$uuidVersion")
             }
         }
         commonTest {
