@@ -32,7 +32,7 @@ kotlin {
                 api("io.ktor:ktor-client-core:1.5.0")
                 api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt")
                 api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:0.0.2")
             }
         }
