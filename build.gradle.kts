@@ -7,6 +7,7 @@ group = "org.hfhbd"
 version = "0.0.1"
 
 repositories {
+    mavenCentral()
     jcenter()
     maven(url = "https://dl.bintray.com/cy6ergn0m/uuid")
     maven(url = "https://kotlin.bintray.com/kotlinx/") // kotlinx.datetime
@@ -26,18 +27,13 @@ kotlin {
 
     
     sourceSets {
-        val coroutinesVersion: String by project
         commonMain {
             dependencies {
-                val ktorVersion: String by project
-                api("io.ktor:ktor-client-core:$ktorVersion")
-                val jsonVersion: String by project
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:$jsonVersion")
-                val dateTimeVersion: String by project
-                api("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                val uuidVersion: String by project
-                api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:$uuidVersion")
+                api("io.ktor:ktor-client-core:1.4.3")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+                api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:0.0.2")
             }
         }
         commonTest {
