@@ -3,12 +3,11 @@ plugins {
     kotlin("plugin.serialization") version "1.4.31"
 }
 
-group = "org.hfhbd"
+group = "app.softwork"
 version = "0.0.1"
 
 repositories {
     mavenCentral()
-    jcenter()
     maven(url = "https://dl.bintray.com/cy6ergn0m/uuid")
     maven(url = "https://kotlin.bintray.com/kotlinx/") // kotlinx.datetime
 }
@@ -18,14 +17,16 @@ kotlin {
 
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
         }
     }
     js(BOTH) {
         nodejs()
     }
 
-    
+
     sourceSets {
         commonMain {
             dependencies {
