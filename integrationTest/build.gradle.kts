@@ -13,11 +13,6 @@ kotlin {
         }
     }
 
-    js(IR) {
-        nodejs()
-    }
-
-
     sourceSets {
         commonTest {
             dependencies {
@@ -30,12 +25,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-            }
-        }
-        val jsMain by getting
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
             }
         }
     }

@@ -14,10 +14,6 @@ kotlin {
             }
         }
     }
-    js(BOTH) {
-        nodejs()
-    }
-
 
     sourceSets {
         // Apache 2, https://github.com/ktorio/ktor/releases/latest
@@ -44,16 +40,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-                api("io.ktor:ktor-client-js:$ktorVersion")
-            }
-        }
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
             }
         }
     }

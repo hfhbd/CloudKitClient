@@ -4,13 +4,14 @@ This Kotlin library allows you to access your Apple CloudKit public database fro
 serverKey authentication.
 
 ## Stability
+
 This library uses experimental Kotlin libraries, so binary, source and semantic stability cannot be provided!
 
 ## Supported Server Platforms
 
 - JVM
-- JS (coming soon, use the JS library from Apple in the meanwhile)
-- Native (coming soon)
+- nodeJS (currently not available)
+- Native (currently not available)
 
 ## Other Client Platforms
 
