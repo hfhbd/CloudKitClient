@@ -21,9 +21,21 @@ This library uses experimental Kotlin libraries, so binary, source and semantic 
 
 ## Supported Databases
 
-Technically, all 3 (public, private, shared) databases are supported. But with the serverKey authentication only the
-public database is useful, because CloudKit is designed with privacy in mind, and the private database is only
-accessible by the user.
+Currently, the public and the private databases are supported.
+
+## Key Generation
+
+CloudKit requires an ECDSA keypair with the prime parameter. The public key is uploaded to the iCloud dashboard, which
+returns the `keyID`. The private key is used to sign your requests. To generate the private key using the JVM supported
+PKCS8 format, use the following commands:
+
+```
+openssl ecparam -name prime256v1 -out gen.pem -genkey -noout
+
+openssl pkcs8 -topk8 -in gen.pem -nocrypt -out privateKey.pem
+```
+
+To retrieve the private key use `cat privateKey.pem`, for the public key use `openssl ec -in privateKey.pem -pubout`.
 
 ## Reference
 

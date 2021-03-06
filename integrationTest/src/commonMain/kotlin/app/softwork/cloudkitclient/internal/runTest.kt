@@ -1,3 +1,3 @@
-package app.softwork.cloudkitclient
+package app.softwork.cloudkitclient.internal
 
 internal expect fun runTest(block: suspend () -> Unit)

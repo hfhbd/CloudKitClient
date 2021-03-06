@@ -1,14 +1,17 @@
 package app.softwork.cloudkitclient
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 @Serializable
 public data class User(
-    @SerialName("userRecordName") override val recordName: String,
-    val firstName: String? = null,
-    val lastName: String? = null,
-    val emailAddress: String? = null
+    @SerialName("userRecordName")
+    override val recordName: String,
+    override val firstName: String? = null,
+    override val lastName: String? = null,
+    override val emailAddress: String? = null,
+    override val created: TimeInformation? = null,
+    override val modified: TimeInformation? = null,
+    override val deleted: Boolean? = null
 ) : UserRecord {
     public companion object : Record.Information<User> {
         override val recordType: String = "users"

@@ -11,12 +11,19 @@ kotlin {
                 useIR = true
             }
         }
+        testRuns["test"].executionTask.configure {
+            environment = listOf("CONTAINER", "KEYID", "PRIVATEKEY").map { it to properties[it] }.toMap()
+        }
     }
 
     sourceSets {
-        commonTest {
+        commonMain {
             dependencies {
                 implementation(project(":core"))
+            }
+        }
+        commonTest {
+            dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
