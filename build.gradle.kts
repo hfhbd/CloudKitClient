@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform") version "1.4.32" apply false
     kotlin("plugin.serialization") version "1.4.32" apply false
-    id("org.jetbrains.dokka") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.30"
 }
 
 group = "app.softwork"
