@@ -2,15 +2,13 @@
 
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.serializer.InstantSerializer
-import kotlinx.datetime.Instant
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import kotlinx.uuid.UUID
+import app.softwork.cloudkitclient.serializer.*
+import kotlinx.datetime.*
+import kotlinx.serialization.*
 
 @Serializable
 public data class TimeInformation(
     val timestamp: Instant,
     val userRecordName: String,
-    val deviceID: UUID
+    val deviceID: String
 )

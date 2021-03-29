@@ -18,7 +18,7 @@ public sealed class Value {
     @SerialName("bytes")
     public data class Byte(
         @SerialName("value")
-        private val base64Value: String
+        private val base64Value: kotlin.String
     ) : Value() {
         @OptIn(InternalAPI::class)
         val value: ByteArray
@@ -28,4 +28,8 @@ public sealed class Value {
     @Serializable
     @SerialName("Location")
     public data class Location(val value: app.softwork.cloudkitclient.types.Location) : Value()
+
+    @Serializable
+    @SerialName("STRING")
+    public data class String(val value: kotlin.String): Value()
 }

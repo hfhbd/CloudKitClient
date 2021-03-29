@@ -1,7 +1,10 @@
 package app.softwork.cloudkitclient
 
-public interface UserRecord: Record {
-    public val firstName: String?
-    public val lastName: String?
+import kotlinx.serialization.*
+
+@Serializable
+public data class UserRecordFields(
+    public val firstName: String?,
+    public val lastName: String?,
     public val emailAddress: String?
-}
+) : Record.Fields
