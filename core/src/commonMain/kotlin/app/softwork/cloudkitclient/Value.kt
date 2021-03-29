@@ -1,7 +1,7 @@
 package app.softwork.cloudkitclient
 
+import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.types.*
-import io.ktor.util.*
 import kotlinx.serialization.*
 
 @Serializable
@@ -20,9 +20,8 @@ public sealed class Value {
         @SerialName("value")
         private val base64Value: kotlin.String
     ) : Value() {
-        @OptIn(InternalAPI::class)
         val value: ByteArray
-            get() = base64Value.decodeBase64Bytes()
+            get() = base64Value.decodeBase64Bytes
     }
 
     @Serializable

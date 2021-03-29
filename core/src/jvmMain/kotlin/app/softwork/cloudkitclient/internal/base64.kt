@@ -13,3 +13,6 @@ internal actual val String.decodeBase64: String get() =
 
 internal actual val ByteArray.decodeBase64: String get() =
     String(Base64.getDecoder().decode(this))
+
+internal actual val String.decodeBase64Bytes: ByteArray get() =
+    Base64.getDecoder().decode(this)
