@@ -12,7 +12,7 @@ kotlin {
             }
         }
         testRuns["test"].executionTask.configure {
-            environment = listOf("CONTAINER", "KEYID", "PRIVATEKEY").map { it to properties[it] }.toMap()
+            environment = System.getProperties() as Map<String, *>
         }
     }
 
