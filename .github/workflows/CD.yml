@@ -2,9 +2,8 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - v* # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
@@ -17,5 +16,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build all modules with Gradle
+        run: ./gradlew -Pall=true -Dcontainer=${{ secrets.CONTAINER }} -DkeyID=${{ secrets.KEYID }} -DprivateKey=${{ secrets.PRIVATEKEY }} build
