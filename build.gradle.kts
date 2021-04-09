@@ -16,6 +16,5 @@ subprojects {
     repositories {
         mavenCentral()
         maven(url = "https://dl.bintray.com/cy6ergn0m/uuid")
-        maven(url = "https://kotlin.bintray.com/kotlinx/") // kotlinx.datetime
     }
 }
