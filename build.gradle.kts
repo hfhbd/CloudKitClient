@@ -9,7 +9,6 @@ version = "0.0.1"
 
 repositories {
     mavenCentral()
-    jcenter() // dokka
 }
 
 subprojects {
