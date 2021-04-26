@@ -8,13 +8,7 @@ plugins {
 kotlin {
     explicitApi()
 
-    jvm {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+    jvm()
 
     sourceSets {
         // Apache 2, https://github.com/ktorio/ktor/releases/latest
@@ -29,18 +23,12 @@ kotlin {
         }
         commonTest {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin("test"))
             }
         }
         val jvmMain by getting {
             dependencies {
                 api("io.ktor:ktor-client-cio:$ktorVersion")
-            }
-        }
-        val jvmTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
             }
         }
     }
