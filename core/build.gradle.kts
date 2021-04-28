@@ -17,7 +17,7 @@ kotlin {
             dependencies {
                 api("io.ktor:ktor-client-core:$ktorVersion")
                 api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
                 api("org.jetbrains.kotlinx.experimental:kotlinx-uuid-core:0.0.3")
             }
         }
