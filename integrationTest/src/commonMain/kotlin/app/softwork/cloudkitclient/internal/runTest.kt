@@ -1,3 +1,5 @@
 package app.softwork.cloudkitclient.internal
 
-internal expect fun runTest(block: suspend () -> Unit)
+import app.softwork.cloudkitclient.*
+
+internal expect fun runTest(clients: List<Client>, block: suspend (Client) -> Unit)

@@ -1,3 +1,3 @@
 package app.softwork.cloudkitclient
 
-expect val client: CKClient
+expect fun client(): CKClient

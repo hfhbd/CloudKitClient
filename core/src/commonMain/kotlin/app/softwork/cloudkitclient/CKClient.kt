@@ -1,17 +1,16 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Lookup.Response.*
 import app.softwork.cloudkitclient.Record.*
 import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.types.*
-import app.softwork.cloudkitclient.types.Asset.Upload.*
-import app.softwork.cloudkitclient.types.Asset.Upload.Response.*
+import app.softwork.cloudkitclient.values.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.datetime.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import kotlin.reflect.*
 
 public class CKClient(
     public val container: String,
@@ -42,17 +41,9 @@ public class CKClient(
     public override val privateDB: Database = Database("private")
     public override val sharedDB: Database = Database("shared")
 
-    public inner class Database internal constructor(internal val name: String) : Client.Database {
-        // temp fix
-        public override suspend fun lookup(
-            lookupRecord: Lookup.Request
-        ): List<SomeUser> =
-            request("/users/lookup/email", Lookup.Request.serializer()) {
-                lookupRecord
-            }.let {
-                json.decodeFromString(Lookup.Response.serializer(), it)
-            }.users
+    override suspend fun download(assetToDownload: Asset): ByteArray = httpClient { }.get(assetToDownload.downloadURL!!)
 
+    public inner class Database internal constructor(internal val name: String) : Client.Database {
         public override suspend fun <F : Fields, R : Record<F>> query(
             recordInformation: Record.Information<F, R>,
             zoneID: ZoneID,
@@ -83,6 +74,14 @@ public class CKClient(
             ) {
                 OperationsRequest(operations = listOf(Create(record = record)))
             }.toRegularResponse(recordInformation).first()
+
+        override suspend fun <F : Fields, R : Record<F>> read(
+            recordName: String,
+            recordInformation: Information<F, R>,
+            zoneID: ZoneID
+        ): R = request("/records/lookup", Request.RecordLookup.serializer()) {
+            Request.RecordLookup(listOf(Request.RecordLookup.RecordName(recordName = recordName)), zoneID = zoneID)
+        }.toRegularResponse(recordInformation).first()
 
         public override suspend fun <F : Fields, R : Record<F>> update(
             record: R,
@@ -115,14 +114,36 @@ public class CKClient(
             }
         }
 
-        public override suspend fun upload(asset: ByteArray, field: Field, zoneID: ZoneID): List<Token> =
-            request("/asset/upload", Asset.Upload.serializer()) {
-                Asset.Upload(tokens = listOf(field), zoneID = zoneID)
+        override suspend fun <F : Fields, R : Record<F>> upload(
+            asset: ByteArray,
+            recordInformation: Record.Information<F, R>,
+            field: KProperty1<F, Value.Asset?>,
+            recordName: String?,
+            zoneID: ZoneID
+        ): Asset =
+            request("/assets/upload", Asset.Upload.serializer()) {
+                Asset.Upload(
+                    tokens = listOf(
+                        Asset.Upload.Field(
+                            fieldName = field.name,
+                            recordInformation.recordType,
+                            recordName = recordName
+                        )
+                    ), zoneID = zoneID
+                )
             }.let {
                 json.decodeFromString(Asset.Upload.Response.serializer(), it)
-            }.tokens.onEach {
-                client.post(it.url) { body = asset }
-            }
+            }.tokens.first().let {
+                httpClient { }.post<String>(it.url) { body = asset }
+            }.let {
+                json.decodeFromString(Asset.Upload.Response.SingleFile.serializer(), it)
+            }.singleFile
+
+        override suspend fun createToken(): Push.Response = request("/tokens/create", Push.Create.serializer()) {
+            Push.Create(environment)
+        }.let {
+            json.decodeFromString(Push.Response.serializer(), it)
+        }
     }
 
     private suspend fun <In> Database.request(

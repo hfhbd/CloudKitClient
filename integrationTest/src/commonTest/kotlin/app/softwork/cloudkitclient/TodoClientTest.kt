@@ -2,57 +2,65 @@ package app.softwork.cloudkitclient
 
 import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.values.*
-import kotlin.test.*
 import kotlinx.coroutines.*
 import kotlinx.uuid.*
+import kotlin.test.*
 
 class TodoClientTest {
-    @Test
-    fun lookupUser() = runTest {
-        val lookup =
-            client.publicDB.lookup(Lookup.byMail("foo@example.com"))
-        assertEquals(1, lookup.size)
-    }
+    private val clients = listOf(client(), TestClient())
 
     @Test
-    fun queryTodos() = runTest {
+    fun createTodo() = runTest(clients) { client ->
+        val todo = client.publicDB.create(
+            TodoRecord(
+                UUID().toString(),
+                TodoRecord.Fields(subtitle = Value.String("Hello World"))
+            ), TodoRecord
+        )
+        delay(timeMillis = client.timeout)
         val todos = client.publicDB.query(TodoRecord)
         assertEquals(1, todos.size)
-        val todo = todos.first()
-        assertNotNull(todo.recordName.toUUIDOrNull())
-        assertEquals("Hello", todo.fields.subtitle.value)
-    }
-
-    @Test
-    fun createTodo() = runTest {
-        val todo = client.publicDB.create(TodoRecord(UUID().toString(), TodoRecord.Companion.Fields(subtitle = Value.String("Hello World"))), TodoRecord)
-        delay(timeMillis = 2000)
-        val todos = client.publicDB.query(TodoRecord)
-        assertEquals(2, todos.size)
         client.publicDB.delete(todo, TodoRecord)
-        delay(timeMillis = 1000)
+        delay(timeMillis = client.timeout)
         val todos2 = client.publicDB.query(TodoRecord)
-        assertEquals(1, todos2.size)
+        assertEquals(0, todos2.size)
     }
 
-
     @Test
-    fun queryTodosDomain() = runTest {
+    fun createTodoDomain() = runTest(clients) { client ->
+        val todo = client.publicDB.create(TodoRecord(Todo(UUID(), "Hello World", asset = null)), TodoRecord).toDomain()
+        delay(timeMillis = client.timeout)
         val todos = client.publicDB.query(TodoRecord).map { it.toDomain() }
         assertEquals(1, todos.size)
-        val todo = todos.first()
-        assertEquals("Hello", todo.subtitle)
+        client.publicDB.delete(TodoRecord(todo), TodoRecord)
+        delay(timeMillis = client.timeout)
+        val todos2 = client.publicDB.query(TodoRecord).map { it.toDomain() }
+        assertEquals(0, todos2.size)
     }
 
     @Test
-    fun createTodoDomain() = runTest {
-        val todo = client.publicDB.create(TodoRecord(Todo(UUID(), "Hello World")), TodoRecord).toDomain()
-        delay(timeMillis = 2000)
-        val todos = client.publicDB.query(TodoRecord).map { it.toDomain() }
-        assertEquals(2, todos.size)
-        client.publicDB.delete(TodoRecord(todo), TodoRecord)
-        delay(timeMillis = 1000)
-        val todos2 = client.publicDB.query(TodoRecord).map { it.toDomain() }
-        assertEquals(1, todos2.size)
+    fun uploadAndDownloadAsset() = runTest(clients) { client ->
+        val assetContent = "Hello Asset".encodeToByteArray()
+        val asset = client.publicDB.upload(assetContent, TodoRecord, TodoRecord.Fields::asset, recordName = "TestAsset")
+
+        client.publicDB.create(
+            TodoRecord(
+                UUID().toString(),
+                TodoRecord.Fields(subtitle = Value.String("Hello World"))
+            ), TodoRecord
+        )
+        delay(timeMillis = client.timeout)
+        val todo = client.publicDB.query(TodoRecord).first()
+        val todoWithAsset = todo.copy(fields = todo.fields.copy(asset = Value.Asset(asset)))
+        val updatedTodo = client.publicDB.update(todoWithAsset, TodoRecord)
+        val assetToDownload = assertNotNull(updatedTodo.fields.asset).value
+        val downloadedContent = client.download(assetToDownload)
+        assertTrue(assetContent.contentEquals(downloadedContent))
+        val todoDeletedAsset =
+            client.publicDB.update(updatedTodo.copy(fields = todo.fields.copy(asset = null)), TodoRecord)
+        assertNull(todoDeletedAsset.fields.asset)
+        client.publicDB.delete(todoDeletedAsset, TodoRecord)
     }
+
+    private val Client.timeout get() = if (this is TestClient) 0L else 2500L
 }
