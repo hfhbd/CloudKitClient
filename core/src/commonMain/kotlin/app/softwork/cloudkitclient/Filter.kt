@@ -1,14 +1,28 @@
 package app.softwork.cloudkitclient
 
+import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
+import kotlin.reflect.*
 
 @Serializable
 public data class Filter(
     val fieldName: String,
     val comparator: Comparator,
     val fieldValue: Value,
-    val distance: Double
+    val distance: Double? = null
 ) {
+
+    public enum class SystemFieldNames(internal val fieldName: String, public val systemFieldName: String) {
+        RecordName("___recordId", "recordName"),
+        Share("___share", "share"),
+        Parent("___parent", "parent"),
+        CreatedBy("___createdBy", "createdUserRecordName"),
+        CreationTime("___createTime", "createdTimestamp"),
+        ModificationTime("___modTime", "modifiedTimestamp"),
+        ModifiedBy("___modifiedBy", "modifiedUserRecordName")
+    }
+
+
     @Serializable
     public enum class Comparator {
         EQUALS, NOT_EQUALS,
@@ -30,5 +44,16 @@ public data class Filter(
         NOT_LIST_MEMBER_BEGINS_WITH,
         LIST_CONTAINS_ALL,
         NOT_LIST_CONTAINS_ALL
+    }
+
+    public class Builder<F : Record.Fields> {
+
+        public infix fun KProperty1<F, Value.String?>.eq(value: kotlin.String) {
+            filters.add(Filter(fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.String(value)))
+        }
+
+        private val filters = mutableListOf<Filter>()
+
+        public fun build(): List<Filter> = filters
     }
 }

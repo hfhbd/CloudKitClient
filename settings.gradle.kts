@@ -1,8 +1,9 @@
-rootProject.name = "CloudKitClient"
+rootProject.name = "cloudkit-client"
 
 include(":core")
-val all: String? by settings
-val includeAll = all?.toBoolean() ?: false
-if (includeAll) {
+include(":testing")
+
+val keyID: String? = System.getProperty("keyID")
+if (keyID != null) {
     include(":integrationTest")
 }
