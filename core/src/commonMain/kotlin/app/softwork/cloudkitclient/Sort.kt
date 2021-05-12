@@ -1,7 +1,9 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Value.*
+import app.softwork.cloudkitclient.types.*
+import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
+import kotlin.reflect.*
 
 /**
  * A sort descriptor dictionary determines the order of the fetched records.
@@ -15,4 +17,22 @@ public data class Sort(
     val fieldName: String,
     val ascending: Boolean = true,
     val relativeLocation: Location? = null
-)
+) {
+    public class Builder<F: Record.Fields> {
+        private val sortedBy = mutableListOf<Sort>()
+
+        public fun ascending(value: KProperty1<F, Value?>) {
+            sortedBy.add(Sort(value.name, ascending = true))
+        }
+
+        public fun descending(value: KProperty1<F, Value?>) {
+            sortedBy.add(Sort(value.name, ascending = false))
+        }
+
+        public infix fun KProperty1<F, Value.Location?>.relativeToLocation(to: Location) {
+            sortedBy.add(Sort(fieldName = name, ascending = true, relativeLocation = to))
+        }
+
+        public fun build(): List<Sort> = sortedBy
+    }
+}

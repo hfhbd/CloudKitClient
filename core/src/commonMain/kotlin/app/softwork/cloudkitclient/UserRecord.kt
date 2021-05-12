@@ -1,10 +1,62 @@
 package app.softwork.cloudkitclient
 
+import app.softwork.cloudkitclient.Record.*
+import app.softwork.cloudkitclient.values.*
+import app.softwork.cloudkitclient.values.Value.String.*
 import kotlinx.serialization.*
+import kotlin.reflect.*
 
 @Serializable
-public data class UserRecordFields(
-    public val firstName: String?,
-    public val lastName: String?,
-    public val emailAddress: String?
-) : Record.Fields
+public data class UserRecord(
+    @SerialName("userRecordName")
+    override val recordName: String,
+    override val fields: Fields,
+    override var created: TimeInformation? = null,
+    override var modified: TimeInformation? = null,
+    override var deleted: Boolean? = null,
+    override val pluginFields: PluginFields = PluginFields(),
+    override var recordChangeTag: String? = null,
+    override val zoneID: ZoneID = ZoneID.default
+) : Record<UserRecord.Fields> {
+    override val recordType: String = Companion.recordType
+
+    public companion object : Information<Fields, UserRecord> {
+        override val recordType: String = "users"
+
+        public override fun fields(): List<KProperty1<Fields, Value?>> = listOfNotNull(
+            Fields::firstName,
+            Fields::lastName,
+            Fields::emailAddress
+        )
+
+        public override fun fieldsSerializer(): KSerializer<Fields> = Fields.serializer()
+    }
+
+    @Serializable
+    public data class Fields(
+        public val firstName: Value.String?,
+        public val lastName: Value.String?,
+        public val emailAddress: Value.String?
+    ) : Record.Fields
+
+
+    /**
+     * A dictionary that identifies a user with the following keys.
+     */
+    @Serializable
+    public data class Identity(val lookupInfo: LookupInfo, val userRecordName: String, val nameComponents: Name) {
+
+        /**
+         * A dictionary used to lookup user information.
+         * @param emailAddress A string representing user’s email address.
+         * @param phoneNumber A string representing user’s phone number.
+         * @param userRecordName The record name field in the associated [User] record.
+         */
+        @Serializable
+        public data class LookupInfo(
+            val emailAddress: String? = null,
+            val phoneNumber: String? = null,
+            val userRecordName: String
+        )
+    }
+}

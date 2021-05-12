@@ -1,21 +1,109 @@
-public final class app/softwork/cloudkitclient/CKClient {
+public final class app/softwork/cloudkitclient/CKClient : app/softwork/cloudkitclient/Client {
 	public static final field Companion Lapp/softwork/cloudkitclient/CKClient$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLapp/softwork/cloudkitclient/Environment;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;[BLapp/softwork/cloudkitclient/Environment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getContainer ()Ljava/lang/String;
 	public final fun getEnvironment ()Lapp/softwork/cloudkitclient/Environment;
-	public final fun getPrivateDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
-	public final fun getPublicDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
-	public final fun getSharedDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
+	public fun getPrivateDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
+	public synthetic fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
+	public fun getPublicDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
+	public synthetic fun getPublicDB ()Lapp/softwork/cloudkitclient/Client$Database;
+	public fun getSharedDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
+	public synthetic fun getSharedDB ()Lapp/softwork/cloudkitclient/Client$Database;
 }
 
 public final class app/softwork/cloudkitclient/CKClient$Companion {
 }
 
-public final class app/softwork/cloudkitclient/CKClient$Database {
-	public final fun lookup (Lapp/softwork/cloudkitclient/Lookup$Request;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public final fun query (Lapp/softwork/cloudkitclient/Record$Information;Lapp/softwork/cloudkitclient/ZoneID;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun query$default (Lapp/softwork/cloudkitclient/CKClient$Database;Lapp/softwork/cloudkitclient/Record$Information;Lapp/softwork/cloudkitclient/ZoneID;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+public final class app/softwork/cloudkitclient/CKClient$Database : app/softwork/cloudkitclient/Client$Database {
+	public fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun lookup (Lapp/softwork/cloudkitclient/Lookup$Request;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun query (Lapp/softwork/cloudkitclient/Record$Information;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun update (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun upload ([BLapp/softwork/cloudkitclient/types/Asset$Upload$Field;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class app/softwork/cloudkitclient/Client {
+	public abstract fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
+	public abstract fun getPublicDB ()Lapp/softwork/cloudkitclient/Client$Database;
+	public abstract fun getSharedDB ()Lapp/softwork/cloudkitclient/Client$Database;
+}
+
+public abstract interface class app/softwork/cloudkitclient/Client$Database {
+	public abstract fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun lookup (Lapp/softwork/cloudkitclient/Lookup$Request;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun query (Lapp/softwork/cloudkitclient/Record$Information;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun update (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun upload ([BLapp/softwork/cloudkitclient/types/Asset$Upload$Field;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class app/softwork/cloudkitclient/Client$Database$DefaultImpls {
+	public static synthetic fun query$default (Lapp/softwork/cloudkitclient/Client$Database;Lapp/softwork/cloudkitclient/Record$Information;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun upload$default (Lapp/softwork/cloudkitclient/Client$Database;[BLapp/softwork/cloudkitclient/types/Asset$Upload$Field;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class app/softwork/cloudkitclient/Create : app/softwork/cloudkitclient/Operation {
+	public static final field Companion Lapp/softwork/cloudkitclient/Create$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/Record;Ljava/lang/String;Ljava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/Record;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/Record;
+	public final fun copy (Lapp/softwork/cloudkitclient/Record;)Lapp/softwork/cloudkitclient/Create;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Create;Lapp/softwork/cloudkitclient/Record;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Create;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getDesiredKeys ()Ljava/util/List;
+	public fun getOperationType ()Ljava/lang/String;
+	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/Create$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Create;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Create;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Create$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Delete : app/softwork/cloudkitclient/Operation {
+	public static final field Companion Lapp/softwork/cloudkitclient/Delete$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/Record;Ljava/lang/String;Ljava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/Record;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/Record;
+	public final fun copy (Lapp/softwork/cloudkitclient/Record;)Lapp/softwork/cloudkitclient/Delete;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Delete;Lapp/softwork/cloudkitclient/Record;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Delete;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getDesiredKeys ()Ljava/util/List;
+	public fun getOperationType ()Ljava/lang/String;
+	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/Delete$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Delete;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Delete;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Delete$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/Environment : java/lang/Enum {
@@ -28,19 +116,20 @@ public final class app/softwork/cloudkitclient/Environment : java/lang/Enum {
 
 public final class app/softwork/cloudkitclient/Filter {
 	public static final field Companion Lapp/softwork/cloudkitclient/Filter$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/Value;DLkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/Value;D)V
+	public synthetic fun <init> (ILjava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/values/Value;Ljava/lang/Double;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/values/Value;Ljava/lang/Double;)V
+	public synthetic fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/values/Value;Ljava/lang/Double;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Lapp/softwork/cloudkitclient/Filter$Comparator;
-	public final fun component3 ()Lapp/softwork/cloudkitclient/Value;
-	public final fun component4 ()D
-	public final fun copy (Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/Value;D)Lapp/softwork/cloudkitclient/Filter;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Filter;Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/Value;DILjava/lang/Object;)Lapp/softwork/cloudkitclient/Filter;
+	public final fun component3 ()Lapp/softwork/cloudkitclient/values/Value;
+	public final fun component4 ()Ljava/lang/Double;
+	public final fun copy (Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/values/Value;Ljava/lang/Double;)Lapp/softwork/cloudkitclient/Filter;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Filter;Ljava/lang/String;Lapp/softwork/cloudkitclient/Filter$Comparator;Lapp/softwork/cloudkitclient/values/Value;Ljava/lang/Double;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Filter;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getComparator ()Lapp/softwork/cloudkitclient/Filter$Comparator;
-	public final fun getDistance ()D
+	public final fun getDistance ()Ljava/lang/Double;
 	public final fun getFieldName ()Ljava/lang/String;
-	public final fun getFieldValue ()Lapp/softwork/cloudkitclient/Value;
+	public final fun getFieldValue ()Lapp/softwork/cloudkitclient/values/Value;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -55,6 +144,12 @@ public final class app/softwork/cloudkitclient/Filter$$serializer : kotlinx/seri
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Filter;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Filter$Builder {
+	public fun <init> ()V
+	public final fun build ()Ljava/util/List;
+	public final fun eq (Lkotlin/reflect/KProperty1;Ljava/lang/String;)V
 }
 
 public final class app/softwork/cloudkitclient/Filter$Companion {
@@ -101,6 +196,19 @@ public final class app/softwork/cloudkitclient/Filter$Comparator$$serializer : k
 
 public final class app/softwork/cloudkitclient/Filter$Comparator$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Filter$SystemFieldNames : java/lang/Enum {
+	public static final field CreatedBy Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field CreationTime Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field ModificationTime Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field ModifiedBy Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field Parent Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field RecordName Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static final field Share Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public final fun getSystemFieldName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static fun values ()[Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
 }
 
 public final class app/softwork/cloudkitclient/Lookup {
@@ -330,6 +438,69 @@ public final class app/softwork/cloudkitclient/Name$Companion {
 }
 
 public abstract interface class app/softwork/cloudkitclient/Operation {
+	public abstract fun getDesiredKeys ()Ljava/util/List;
+	public abstract fun getOperationType ()Ljava/lang/String;
+	public abstract fun getRecord ()Lapp/softwork/cloudkitclient/Record;
+}
+
+public final class app/softwork/cloudkitclient/OperationsRequest {
+	public static final field Companion Lapp/softwork/cloudkitclient/OperationsRequest$Companion;
+	public synthetic fun <init> (ILjava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/Boolean;Ljava/util/List;ZLkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/Boolean;Ljava/util/List;Z)V
+	public synthetic fun <init> (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/Boolean;Ljava/util/List;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Lapp/softwork/cloudkitclient/ZoneID;
+	public final fun component3 ()Ljava/lang/Boolean;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Z
+	public final fun copy (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/Boolean;Ljava/util/List;Z)Lapp/softwork/cloudkitclient/OperationsRequest;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/OperationsRequest;Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/Boolean;Ljava/util/List;ZILjava/lang/Object;)Lapp/softwork/cloudkitclient/OperationsRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAtomic ()Ljava/lang/Boolean;
+	public final fun getDesiredKeys ()Ljava/util/List;
+	public final fun getNumbersAsStrings ()Z
+	public final fun getOperations ()Ljava/util/List;
+	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/OperationsRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/OperationsRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/OperationsRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/OperationsRequest$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/PluginFields {
+	public static final field Companion Lapp/softwork/cloudkitclient/PluginFields$Companion;
+	public fun <init> ()V
+	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
+}
+
+public final class app/softwork/cloudkitclient/PluginFields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/PluginFields$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/PluginFields;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/PluginFields;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/PluginFields$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public abstract interface class app/softwork/cloudkitclient/Record {
@@ -337,57 +508,41 @@ public abstract interface class app/softwork/cloudkitclient/Record {
 	public abstract fun getDeleted ()Ljava/lang/Boolean;
 	public abstract fun getFields ()Lapp/softwork/cloudkitclient/Record$Fields;
 	public abstract fun getModified ()Lapp/softwork/cloudkitclient/TimeInformation;
-	public abstract fun getPluginFields ()Lapp/softwork/cloudkitclient/Record$PluginFields;
+	public abstract fun getPluginFields ()Lapp/softwork/cloudkitclient/PluginFields;
 	public abstract fun getRecordChangeTag ()Ljava/lang/String;
 	public abstract fun getRecordName ()Ljava/lang/String;
 	public abstract fun getRecordType ()Ljava/lang/String;
 	public abstract fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
+	public abstract fun setCreated (Lapp/softwork/cloudkitclient/TimeInformation;)V
+	public abstract fun setDeleted (Ljava/lang/Boolean;)V
+	public abstract fun setModified (Lapp/softwork/cloudkitclient/TimeInformation;)V
+	public abstract fun setRecordChangeTag (Ljava/lang/String;)V
 }
 
 public abstract interface class app/softwork/cloudkitclient/Record$Fields {
 }
 
 public abstract interface class app/softwork/cloudkitclient/Record$Information {
+	public abstract fun fields ()Ljava/util/List;
+	public abstract fun fieldsSerializer ()Lkotlinx/serialization/KSerializer;
 	public abstract fun getRecordType ()Ljava/lang/String;
 	public abstract fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/Record$PluginFields {
-	public static final field Companion Lapp/softwork/cloudkitclient/Record$PluginFields$Companion;
-	public fun <init> ()V
-	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-}
-
-public final class app/softwork/cloudkitclient/Record$PluginFields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Record$PluginFields$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Record$PluginFields;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Record$PluginFields;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Record$PluginFields$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
 public final class app/softwork/cloudkitclient/Sort {
 	public static final field Companion Lapp/softwork/cloudkitclient/Sort$Companion;
-	public synthetic fun <init> (ILjava/lang/String;ZLapp/softwork/cloudkitclient/Value$Location;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;ZLapp/softwork/cloudkitclient/Value$Location;)V
-	public synthetic fun <init> (Ljava/lang/String;ZLapp/softwork/cloudkitclient/Value$Location;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (ILjava/lang/String;ZLapp/softwork/cloudkitclient/types/Location;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;ZLapp/softwork/cloudkitclient/types/Location;)V
+	public synthetic fun <init> (Ljava/lang/String;ZLapp/softwork/cloudkitclient/types/Location;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Z
-	public final fun component3 ()Lapp/softwork/cloudkitclient/Value$Location;
-	public final fun copy (Ljava/lang/String;ZLapp/softwork/cloudkitclient/Value$Location;)Lapp/softwork/cloudkitclient/Sort;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Sort;Ljava/lang/String;ZLapp/softwork/cloudkitclient/Value$Location;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Sort;
+	public final fun component3 ()Lapp/softwork/cloudkitclient/types/Location;
+	public final fun copy (Ljava/lang/String;ZLapp/softwork/cloudkitclient/types/Location;)Lapp/softwork/cloudkitclient/Sort;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Sort;Ljava/lang/String;ZLapp/softwork/cloudkitclient/types/Location;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Sort;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAscending ()Z
 	public final fun getFieldName ()Ljava/lang/String;
-	public final fun getRelativeLocation ()Lapp/softwork/cloudkitclient/Value$Location;
+	public final fun getRelativeLocation ()Lapp/softwork/cloudkitclient/types/Location;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -404,21 +559,16 @@ public final class app/softwork/cloudkitclient/Sort$$serializer : kotlinx/serial
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/Sort$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+public final class app/softwork/cloudkitclient/Sort$Builder {
+	public fun <init> ()V
+	public final fun ascending (Lkotlin/reflect/KProperty1;)V
+	public final fun build ()Ljava/util/List;
+	public final fun descending (Lkotlin/reflect/KProperty1;)V
+	public final fun relativeToLocation (Lkotlin/reflect/KProperty1;Lapp/softwork/cloudkitclient/types/Location;)V
 }
 
-public final class app/softwork/cloudkitclient/SystemFieldNames : java/lang/Enum {
-	public static final field CreatedBy Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field CreationTime Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field ModificationTime Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field ModifiedBy Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field Parent Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field RecordName Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static final field Share Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public final fun getSystemFieldName ()Ljava/lang/String;
-	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/SystemFieldNames;
-	public static fun values ()[Lapp/softwork/cloudkitclient/SystemFieldNames;
+public final class app/softwork/cloudkitclient/Sort$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/TimeInformation {
@@ -454,96 +604,166 @@ public final class app/softwork/cloudkitclient/TimeInformation$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User : app/softwork/cloudkitclient/Record {
-	public static final field Companion Lapp/softwork/cloudkitclient/User$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/UserRecordFields;Lapp/softwork/cloudkitclient/Record$PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/UserRecordFields;Lapp/softwork/cloudkitclient/Record$PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;)V
-	public synthetic fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/UserRecordFields;Lapp/softwork/cloudkitclient/Record$PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+public final class app/softwork/cloudkitclient/Update : app/softwork/cloudkitclient/Operation {
+	public static final field Companion Lapp/softwork/cloudkitclient/Update$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/Record;Ljava/lang/String;Ljava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/Record;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/Record;
+	public final fun copy (Lapp/softwork/cloudkitclient/Record;)Lapp/softwork/cloudkitclient/Update;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Update;Lapp/softwork/cloudkitclient/Record;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Update;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getDesiredKeys ()Ljava/util/List;
+	public fun getOperationType ()Ljava/lang/String;
+	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/Update$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Update;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Update;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Update$Companion {
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/UserRecord : app/softwork/cloudkitclient/Record {
+	public static final field Companion Lapp/softwork/cloudkitclient/UserRecord$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;)V
+	public synthetic fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lapp/softwork/cloudkitclient/TimeInformation;
+	public final fun component2 ()Lapp/softwork/cloudkitclient/UserRecord$Fields;
 	public final fun component3 ()Lapp/softwork/cloudkitclient/TimeInformation;
-	public final fun component4 ()Ljava/lang/Boolean;
-	public final fun component5 ()Lapp/softwork/cloudkitclient/UserRecordFields;
-	public final fun component6 ()Lapp/softwork/cloudkitclient/Record$PluginFields;
+	public final fun component4 ()Lapp/softwork/cloudkitclient/TimeInformation;
+	public final fun component5 ()Ljava/lang/Boolean;
+	public final fun component6 ()Lapp/softwork/cloudkitclient/PluginFields;
 	public final fun component7 ()Ljava/lang/String;
 	public final fun component8 ()Lapp/softwork/cloudkitclient/ZoneID;
-	public final fun copy (Ljava/lang/String;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/UserRecordFields;Lapp/softwork/cloudkitclient/Record$PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;)Lapp/softwork/cloudkitclient/User;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/User;Ljava/lang/String;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/UserRecordFields;Lapp/softwork/cloudkitclient/Record$PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/User;
+	public final fun copy (Ljava/lang/String;Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;)Lapp/softwork/cloudkitclient/UserRecord;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/UserRecord;Ljava/lang/String;Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/TimeInformation;Lapp/softwork/cloudkitclient/TimeInformation;Ljava/lang/Boolean;Lapp/softwork/cloudkitclient/PluginFields;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/UserRecord;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getCreated ()Lapp/softwork/cloudkitclient/TimeInformation;
 	public fun getDeleted ()Ljava/lang/Boolean;
 	public synthetic fun getFields ()Lapp/softwork/cloudkitclient/Record$Fields;
-	public fun getFields ()Lapp/softwork/cloudkitclient/UserRecordFields;
+	public fun getFields ()Lapp/softwork/cloudkitclient/UserRecord$Fields;
 	public fun getModified ()Lapp/softwork/cloudkitclient/TimeInformation;
-	public fun getPluginFields ()Lapp/softwork/cloudkitclient/Record$PluginFields;
+	public fun getPluginFields ()Lapp/softwork/cloudkitclient/PluginFields;
 	public fun getRecordChangeTag ()Ljava/lang/String;
 	public fun getRecordName ()Ljava/lang/String;
 	public fun getRecordType ()Ljava/lang/String;
 	public fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
 	public fun hashCode ()I
+	public fun setCreated (Lapp/softwork/cloudkitclient/TimeInformation;)V
+	public fun setDeleted (Ljava/lang/Boolean;)V
+	public fun setModified (Lapp/softwork/cloudkitclient/TimeInformation;)V
+	public fun setRecordChangeTag (Ljava/lang/String;)V
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class app/softwork/cloudkitclient/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/User$$serializer;
+public final class app/softwork/cloudkitclient/UserRecord$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/UserRecord$$serializer;
 	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/User;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/UserRecord;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/User;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/UserRecord;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User$Companion : app/softwork/cloudkitclient/Record$Information {
+public final class app/softwork/cloudkitclient/UserRecord$Companion : app/softwork/cloudkitclient/Record$Information {
+	public fun fields ()Ljava/util/List;
+	public fun fieldsSerializer ()Lkotlinx/serialization/KSerializer;
 	public fun getRecordType ()Ljava/lang/String;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity {
-	public static final field Companion Lapp/softwork/cloudkitclient/User$Identity$Companion;
-	public synthetic fun <init> (ILapp/softwork/cloudkitclient/User$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;)V
-	public final fun component1 ()Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;
+public final class app/softwork/cloudkitclient/UserRecord$Fields : app/softwork/cloudkitclient/Record$Fields {
+	public static final field Companion Lapp/softwork/cloudkitclient/UserRecord$Fields$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public final fun component2 ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public final fun component3 ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public final fun copy (Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;)Lapp/softwork/cloudkitclient/UserRecord$Fields;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/UserRecord$Fields;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/UserRecord$Fields;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmailAddress ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public final fun getFirstName ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public final fun getLastName ()Lapp/softwork/cloudkitclient/values/Value$String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/UserRecord$Fields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/UserRecord$Fields$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/UserRecord$Fields;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/UserRecord$Fields;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/UserRecord$Fields$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/UserRecord$Identity {
+	public static final field Companion Lapp/softwork/cloudkitclient/UserRecord$Identity$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Lapp/softwork/cloudkitclient/Name;
-	public final fun copy (Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;)Lapp/softwork/cloudkitclient/User$Identity;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/User$Identity;Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/User$Identity;
+	public final fun copy (Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;)Lapp/softwork/cloudkitclient/UserRecord$Identity;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/UserRecord$Identity;Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Ljava/lang/String;Lapp/softwork/cloudkitclient/Name;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/UserRecord$Identity;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getLookupInfo ()Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;
+	public final fun getLookupInfo ()Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;
 	public final fun getNameComponents ()Lapp/softwork/cloudkitclient/Name;
 	public final fun getUserRecordName ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/User$Identity$$serializer;
+public final class app/softwork/cloudkitclient/UserRecord$Identity$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/UserRecord$Identity$$serializer;
 	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/User$Identity;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/UserRecord$Identity;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/User$Identity;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/UserRecord$Identity;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity$Companion {
+public final class app/softwork/cloudkitclient/UserRecord$Identity$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity$LookupInfo {
-	public static final field Companion Lapp/softwork/cloudkitclient/User$Identity$LookupInfo$Companion;
+public final class app/softwork/cloudkitclient/UserRecord$Identity$LookupInfo {
+	public static final field Companion Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo$Companion;
 	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getEmailAddress ()Ljava/lang/String;
 	public final fun getPhoneNumber ()Ljava/lang/String;
@@ -552,205 +772,19 @@ public final class app/softwork/cloudkitclient/User$Identity$LookupInfo {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity$LookupInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/User$Identity$LookupInfo$$serializer;
+public final class app/softwork/cloudkitclient/UserRecord$Identity$LookupInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo$$serializer;
 	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/User$Identity$LookupInfo;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/User$Identity$LookupInfo$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/UserRecordFields : app/softwork/cloudkitclient/Record$Fields {
-	public static final field Companion Lapp/softwork/cloudkitclient/UserRecordFields$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/lang/String;
-	public final fun component3 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/UserRecordFields;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/UserRecordFields;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/UserRecordFields;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getEmailAddress ()Ljava/lang/String;
-	public final fun getFirstName ()Ljava/lang/String;
-	public final fun getLastName ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/UserRecordFields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/UserRecordFields$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/UserRecordFields;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/UserRecordFields;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/UserRecordFields$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract class app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$Companion;
-	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-}
-
-public final class app/softwork/cloudkitclient/Value$AssetValue : app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$AssetValue$Companion;
-	public synthetic fun <init> (ILapp/softwork/cloudkitclient/types/Asset;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Lapp/softwork/cloudkitclient/types/Asset;)V
-	public final fun component1 ()Lapp/softwork/cloudkitclient/types/Asset;
-	public final fun copy (Lapp/softwork/cloudkitclient/types/Asset;)Lapp/softwork/cloudkitclient/Value$AssetValue;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Value$AssetValue;Lapp/softwork/cloudkitclient/types/Asset;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Value$AssetValue;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Asset;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/Value$AssetValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Value$AssetValue$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Value$AssetValue;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Value$AssetValue;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$AssetValue$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Bool : app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$Bool$Companion;
-	public synthetic fun <init> (IZLkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Z)V
-	public final fun component1 ()Z
-	public final fun copy (Z)Lapp/softwork/cloudkitclient/Value$Bool;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Value$Bool;ZILjava/lang/Object;)Lapp/softwork/cloudkitclient/Value$Bool;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Z
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/Value$Bool$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Value$Bool$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Value$Bool;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Value$Bool;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Bool$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Byte : app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$Byte$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;)V
-	public final fun copy (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Value$Byte;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Value$Byte;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Value$Byte;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()[B
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/Value$Byte$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Value$Byte$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Value$Byte;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Value$Byte;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Byte$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Location : app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$Location$Companion;
-	public synthetic fun <init> (ILapp/softwork/cloudkitclient/types/Location;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Lapp/softwork/cloudkitclient/types/Location;)V
-	public final fun component1 ()Lapp/softwork/cloudkitclient/types/Location;
-	public final fun copy (Lapp/softwork/cloudkitclient/types/Location;)Lapp/softwork/cloudkitclient/Value$Location;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Value$Location;Lapp/softwork/cloudkitclient/types/Location;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Value$Location;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Location;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/Value$Location$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Value$Location$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Value$Location;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Value$Location;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$Location$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$String : app/softwork/cloudkitclient/Value {
-	public static final field Companion Lapp/softwork/cloudkitclient/Value$String$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Value$String;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Value$String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Value$String;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class app/softwork/cloudkitclient/Value$String$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Value$String$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Value$String;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Value$String;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Value$String$Companion {
+public final class app/softwork/cloudkitclient/UserRecord$Identity$LookupInfo$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -862,6 +896,134 @@ public final class app/softwork/cloudkitclient/types/Asset$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class app/softwork/cloudkitclient/types/Asset$Upload {
+	public static final field Companion Lapp/softwork/cloudkitclient/types/Asset$Upload$Companion;
+	public synthetic fun <init> (ILjava/util/List;Lapp/softwork/cloudkitclient/ZoneID;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;)V
+	public synthetic fun <init> (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Lapp/softwork/cloudkitclient/ZoneID;
+	public final fun copy (Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;)Lapp/softwork/cloudkitclient/types/Asset$Upload;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/types/Asset$Upload;Ljava/util/List;Lapp/softwork/cloudkitclient/ZoneID;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/types/Asset$Upload;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTokens ()Ljava/util/List;
+	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Asset$Upload$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Asset$Upload;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Asset$Upload;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Field {
+	public static final field Companion Lapp/softwork/cloudkitclient/types/Asset$Upload$Field$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFieldName ()Ljava/lang/String;
+	public final fun getRecordName ()Ljava/lang/String;
+	public final fun getRecordType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Field$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Asset$Upload$Field$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Field$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response {
+	public static final field Companion Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Companion;
+	public synthetic fun <init> (ILjava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;Ljava/util/List;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTokens ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Token {
+	public static final field Companion Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFieldName ()Ljava/lang/String;
+	public final fun getRecordName ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Token$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Token$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class app/softwork/cloudkitclient/types/Location {
 	public static final field Companion Lapp/softwork/cloudkitclient/types/Location$Companion;
 	public fun <init> (DDDDDDLjava/lang/String;Lkotlinx/datetime/Instant;)V
@@ -960,6 +1122,303 @@ public final class app/softwork/cloudkitclient/types/Reference$Action$Companion 
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract class app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Companion;
+	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Asset : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Asset$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/types/Asset;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/types/Asset;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/types/Asset;
+	public final fun copy (Lapp/softwork/cloudkitclient/types/Asset;)Lapp/softwork/cloudkitclient/values/Value$Asset;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Asset;Lapp/softwork/cloudkitclient/types/Asset;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Asset;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Asset;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Asset$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Asset$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Asset;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Asset;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Asset$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Boolean : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Boolean$Companion;
+	public synthetic fun <init> (IZLkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lapp/softwork/cloudkitclient/values/Value$Boolean;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Boolean;ZILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Boolean;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Boolean$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Boolean$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Boolean;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Boolean;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Boolean$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Byte : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Byte$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;)V
+	public final fun copy (Ljava/lang/String;)Lapp/softwork/cloudkitclient/values/Value$Byte;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Byte;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Byte;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Byte$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Byte$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Byte;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Byte;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Byte$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$DateTime : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$DateTime$Companion;
+	public synthetic fun <init> (IJLkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (J)V
+	public final fun copy (J)Lapp/softwork/cloudkitclient/values/Value$DateTime;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$DateTime;JILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$DateTime;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lkotlinx/datetime/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$DateTime$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$DateTime$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$DateTime;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$DateTime;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$DateTime$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Double : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Double$Companion;
+	public fun <init> (D)V
+	public synthetic fun <init> (IDLkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public final fun component1 ()D
+	public final fun copy (D)Lapp/softwork/cloudkitclient/values/Value$Double;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Double;DILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Double;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Double$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Double$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Double;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Double;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Double$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Int : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Int$Companion;
+	public fun <init> (I)V
+	public synthetic fun <init> (IILkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun copy (I)Lapp/softwork/cloudkitclient/values/Value$Int;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Int;IILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Int;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Int$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Int$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Int;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Int;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Int$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$List : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$List$Companion;
+	public synthetic fun <init> (ILjava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lapp/softwork/cloudkitclient/values/Value$List;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$List;Ljava/util/List;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$List;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$List$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$List$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$List;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$List;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$List$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Location : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Location$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/types/Location;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/types/Location;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/types/Location;
+	public final fun copy (Lapp/softwork/cloudkitclient/types/Location;)Lapp/softwork/cloudkitclient/values/Value$Location;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Location;Lapp/softwork/cloudkitclient/types/Location;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Location;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Location;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Location$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Location$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Location;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Location;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Location$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Reference : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Reference$Companion;
+	public synthetic fun <init> (ILapp/softwork/cloudkitclient/types/Reference;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/types/Reference;)V
+	public final fun component1 ()Lapp/softwork/cloudkitclient/types/Reference;
+	public final fun copy (Lapp/softwork/cloudkitclient/types/Reference;)Lapp/softwork/cloudkitclient/values/Value$Reference;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Reference;Lapp/softwork/cloudkitclient/types/Reference;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Reference;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Reference;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Reference$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Reference;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$Reference;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$Reference$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$String : app/softwork/cloudkitclient/values/Value {
+	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$String$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lapp/softwork/cloudkitclient/values/Value$String;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$String$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$String$$serializer;
+	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$String;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/values/Value$String;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/values/Value$String$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
