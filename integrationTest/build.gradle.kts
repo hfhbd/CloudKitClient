@@ -18,6 +18,7 @@ kotlin {
         }
         commonTest {
             dependencies {
+                implementation(project(":testing"))
                 implementation(kotlin("test"))
             }
         }

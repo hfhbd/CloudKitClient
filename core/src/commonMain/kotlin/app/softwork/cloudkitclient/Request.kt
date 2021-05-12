@@ -11,4 +11,15 @@ internal data class Request(
     val desiredKeys: List<String>? = null,
     val numbersAsStrings: Boolean = false,
     val zoneWide: Boolean = true
-)
+) {
+    @Serializable
+    data class RecordLookup(
+        val records: List<RecordName>,
+        val zoneID: ZoneID?,
+        val desiredKeys: List<String>? = null,
+        val numbersAsStrings: Boolean = false,
+    ) {
+        @Serializable
+        data class RecordName(val recordName: String, val desiredKeys: List<String>? = null)
+    }
+}

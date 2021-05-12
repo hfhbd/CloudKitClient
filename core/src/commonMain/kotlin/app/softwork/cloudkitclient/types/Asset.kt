@@ -7,7 +7,7 @@ import kotlinx.serialization.*
 public data class Asset(
     val fileChecksum: String,
     val size: Int,
-    val receipt: String,
+    val receipt: String? = null,
     val referenceChecksum: String? = null,
     val wrappingKey: String? = null,
     val downloadURL: String? = null
@@ -21,6 +21,9 @@ public data class Asset(
         public data class Response(val tokens: List<Token>) {
             @Serializable
             public data class Token(val recordName: String, val fieldName: String, val url: String)
+
+            @Serializable
+            public data class SingleFile(val singleFile: Asset)
         }
     }
 }

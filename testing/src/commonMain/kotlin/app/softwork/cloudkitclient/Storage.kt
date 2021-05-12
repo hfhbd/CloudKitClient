@@ -2,8 +2,6 @@ package app.softwork.cloudkitclient
 
 import app.softwork.cloudkitclient.Filter.Comparator.*
 import app.softwork.cloudkitclient.Record.*
-import app.softwork.cloudkitclient.types.Asset.Upload.*
-import app.softwork.cloudkitclient.types.Asset.Upload.Response.*
 import app.softwork.cloudkitclient.values.*
 import app.softwork.cloudkitclient.values.Value.*
 import kotlinx.datetime.Clock.*
@@ -15,18 +13,16 @@ import kotlin.collections.List
 import kotlin.reflect.*
 import kotlin.time.*
 
-public class Storage(public val initUser: UserRecord) {
+public class Storage(
+    public val initUser: UserRecord,
+    private val assets: MutableMap<UUID, Pair<app.softwork.cloudkitclient.types.Asset, ByteArray>>
+) {
 
-    public data class Key(val recordType: String, val recordName: String)
-
-    public val storage: MutableMap<Key, Record<*>> = mutableMapOf()
+    public val storage: MutableMap<String, Record<*>> = mutableMapOf()
 
     init {
         create(initUser, UserRecord)
     }
-
-    public val assets: MutableMap<String, Pair<app.softwork.cloudkitclient.types.Asset, ByteArray>> =
-        mutableMapOf()
 
     public fun randomChangeTag(): String = UUID().toString().take(8)
 
@@ -45,13 +41,19 @@ public class Storage(public val initUser: UserRecord) {
         record.recordChangeTag = changeTag
         record.created = now
         record.modified = now
-        val key = Key(recordType = recordInformation.recordType, recordName = record.recordName)
-        storage[key] = record
+        storage[record.recordName] = record
         return record
     }
 
+    public fun <F : Record.Fields, R : Record<F>> get(
+        recordName: String,
+        recordInformation: Record.Information<F, R>
+    ): R {
+        return storage[recordName]!! as R
+    }
+
     public fun <F : Record.Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>) {
-        val key = Key(recordType = recordInformation.recordType, recordName = record.recordName)
+        val key = record.recordName
         val oldRecord = storage[key]
         requireNotNull(oldRecord)
         require(oldRecord.recordChangeTag == record.recordChangeTag)
@@ -59,26 +61,33 @@ public class Storage(public val initUser: UserRecord) {
     }
 
     public fun <F : Record.Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R {
-        val oldRecord = storage[Key(recordType = recordInformation.recordType, recordName = record.recordName)]
+        val oldRecord = storage[record.recordName]
         requireNotNull(oldRecord)
         require(oldRecord.recordChangeTag == record.recordChangeTag)
         val changeTag = randomChangeTag()
         val now = now()
         record.recordChangeTag = changeTag
         record.modified = now
-        storage[Key(recordType = recordInformation.recordType, recordName = record.recordName)] = record
+        storage[record.recordName] = record
         return record
     }
 
-    public fun upload(content: ByteArray, field: Field): List<Token> {
+    public fun <F : Record.Fields, R : Record<F>> upload(
+        content: ByteArray,
+        recordInformation: Record.Information<F, R>,
+        field: KProperty1<F, Value.Asset?>,
+        recordName: String?
+    ): app.softwork.cloudkitclient.types.Asset {
+        val download = UUID()
         val asset = app.softwork.cloudkitclient.types.Asset(
             fileChecksum = "",
             size = content.size,
-            receipt = ""
+            receipt = "",
+            downloadURL = download.toString()
         )
-        val recordName = field.recordName ?: UUID().toString()
-        assets[recordName] = asset to content
-        return listOf(Token(recordName = recordName, fieldName = field.fieldName, url = ""))
+        assets[download] = asset to content
+
+        return asset
     }
 
     @OptIn(ExperimentalTime::class)
@@ -86,10 +95,10 @@ public class Storage(public val initUser: UserRecord) {
         recordInformation: Information<F, R>,
         filters: List<Filter>?,
         sorts: List<Sort>?
-    ): List<R> = storage.entries.filter { (key, _) ->
-        key.recordType == recordInformation.recordType
+    ): List<R> = storage.values.filter { value ->
+        value.recordType == recordInformation.recordType
     }.map {
-        it.value as R
+        it as R
     }.filter { record ->
         filters?.let {
             val properties = recordInformation.fields()
@@ -129,7 +138,7 @@ public class Storage(public val initUser: UserRecord) {
     }.get(record.fields)?.asComparable()
 
     private fun Value.asComparable(): Comparable<Value> {
-        return when(this) {
+        return when (this) {
             is Value.Boolean -> comparable {
                 require(it is Value.Boolean)
                 value.compareTo(it.value)
@@ -150,7 +159,7 @@ public class Storage(public val initUser: UserRecord) {
         }
     }
 
-    private fun<T> T.comparable(comparing: T.(T) -> Int): Comparable<T> = object : Comparable<T> {
+    private fun <T> T.comparable(comparing: T.(T) -> Int): Comparable<T> = object : Comparable<T> {
         override fun compareTo(other: T): Int = comparing(other)
     }
 
