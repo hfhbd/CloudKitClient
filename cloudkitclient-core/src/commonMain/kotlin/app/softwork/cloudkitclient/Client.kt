@@ -17,8 +17,8 @@ public interface Client {
         public suspend fun <F : Fields, R : Record<F>> query(
             recordInformation: Information<F, R>,
             zoneID: ZoneID = ZoneID.default,
-            filter: Filter.Builder<F>.() -> Unit = { },
-            sort: Builder<F>.() -> Unit = { }
+            sort: Builder<F>.() -> Unit = { },
+            filter: Filter.Builder<F>.() -> Unit = { }
         ): List<R>
 
         public suspend fun <F : Fields, R : Record<F>> create(record: R, recordInformation: Information<F, R>): R
@@ -26,7 +26,7 @@ public interface Client {
             recordName: String,
             recordInformation: Information<F, R>,
             zoneID: ZoneID = ZoneID.default
-        ): R
+        ): R?
 
         public suspend fun <F : Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R
         public suspend fun <F : Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>)

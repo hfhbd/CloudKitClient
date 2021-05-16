@@ -62,5 +62,10 @@ class TodoClientTest {
         client.publicDB.delete(todoDeletedAsset, TodoRecord)
     }
 
+    @Test
+    fun notFound() = runTest(clients) { client ->
+        assertNull(client.publicDB.read("TestingNotFound", TodoRecord))
+    }
+
     private val Client.timeout get() = if (this is TestClient) 0L else 2500L
 }
