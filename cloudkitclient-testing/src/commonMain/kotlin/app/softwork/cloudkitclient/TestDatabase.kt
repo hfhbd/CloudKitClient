@@ -22,8 +22,8 @@ public open class TestDatabase(
     public override suspend fun <F: Record.Fields, R : Record<F>> query(
         recordInformation: Information<F, R>,
         zoneID: ZoneID,
-        filter: Filter.Builder<F>.() -> Unit,
-        sort: Sort.Builder<F>.() -> Unit
+        sort: Sort.Builder<F>.() -> Unit,
+        filter: Filter.Builder<F>.() -> Unit
     ): List<R> {
         return zones[zoneID]!!.query(recordInformation, Filter.Builder<F>().apply(filter).build(), Sort.Builder<F>().apply(sort).build())
     }
@@ -37,7 +37,7 @@ public open class TestDatabase(
         recordName: String,
         recordInformation: Information<F, R>,
         zoneID: ZoneID
-    ): R = zones[zoneID]!!.get(recordName, recordInformation)
+    ): R? = zones[zoneID]!!.get(recordName, recordInformation)
 
     override suspend fun <F: Record.Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R =
         record.zone.update(record, recordInformation)

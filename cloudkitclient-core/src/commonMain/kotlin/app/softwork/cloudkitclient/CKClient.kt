@@ -45,10 +45,10 @@ public class CKClient(
 
     public inner class Database internal constructor(internal val name: String) : Client.Database {
         public override suspend fun <F : Fields, R : Record<F>> query(
-            recordInformation: Record.Information<F, R>,
+            recordInformation: Information<F, R>,
             zoneID: ZoneID,
-            filter: Filter.Builder<F>.() -> Unit,
-            sort: Sort.Builder<F>.() -> Unit
+            sort: Sort.Builder<F>.() -> Unit,
+            filter: Filter.Builder<F>.() -> Unit
         ): List<R> = request("/records/query", Request.serializer()) {
             Request(
                 zoneID = zoneID,
@@ -62,7 +62,7 @@ public class CKClient(
 
         public override suspend fun <F : Fields, R : Record<F>> create(
             record: R,
-            recordInformation: Record.Information<F, R>
+            recordInformation: Information<F, R>
         ): R =
             request(
                 "/records/modify",
@@ -79,13 +79,20 @@ public class CKClient(
             recordName: String,
             recordInformation: Information<F, R>,
             zoneID: ZoneID
-        ): R = request("/records/lookup", Request.RecordLookup.serializer()) {
+        ): R? = request("/records/lookup", Request.RecordLookup.serializer()) {
             Request.RecordLookup(listOf(Request.RecordLookup.RecordName(recordName = recordName)), zoneID = zoneID)
-        }.toRegularResponse(recordInformation).first()
+        }.handleError(recordInformation).run {
+            when (this) {
+                is Holder.Success -> response.records.single()
+                is Holder.Failure -> {
+                    if (error.serverErrorCode == "NOT_FOUND") null else throw error
+                }
+            }
+        }
 
         public override suspend fun <F : Fields, R : Record<F>> update(
             record: R,
-            recordInformation: Record.Information<F, R>
+            recordInformation: Information<F, R>
         ): R =
             request(
                 "/records/modify",
@@ -100,7 +107,7 @@ public class CKClient(
 
         public override suspend fun <F : Fields, R : Record<F>> delete(
             record: R,
-            recordInformation: Record.Information<F, R>
+            recordInformation: Information<F, R>
         ) {
             request(
                 "/records/modify",
@@ -116,7 +123,7 @@ public class CKClient(
 
         override suspend fun <F : Fields, R : Record<F>> upload(
             asset: ByteArray,
-            recordInformation: Record.Information<F, R>,
+            recordInformation: Information<F, R>,
             field: KProperty1<F, Value.Asset?>,
             recordName: String?,
             zoneID: ZoneID
@@ -167,14 +174,42 @@ public class CKClient(
         this.body = body
     }
 
-    private fun <F : Fields, R : Record<F>> String.toRegularResponse(recordInformation: Record.Information<F, R>) =
-        let {
-            println(it)
-            json.decodeFromString(
+    private fun <F : Fields, R : Record<F>> String.toRegularResponse(recordInformation: Information<F, R>): List<R> {
+        val response = json.decodeFromString(
+            Response.serializer(
+                recordInformation.fieldsSerializer(),
+                recordInformation.serializer()
+            ), this
+        )
+        return response.records
+    }
+
+
+    private fun <F : Fields, R : Record<F>> String.handleError(
+        recordInformation: Information<F, R>
+    ): Holder<F, R> =
+        try {
+            val response = json.decodeFromString(
                 Response.serializer(
                     recordInformation.fieldsSerializer(),
                     recordInformation.serializer()
-                ), it
+                ), this
             )
-        }.records
+            Holder.Success(response)
+        } catch (e: SerializationException) {
+            try {
+                val error = json.decodeFromString(Holder.Failure.ReadError.serializer(), this)
+                Holder.Failure(error.records.first())
+            } catch (error: SerializationException) {
+                throw error
+            }
+        }
+
+    private sealed class Holder<F : Fields, R : Record<F>> {
+        class Success<F : Fields, R : Record<F>>(val response: Response<F, R>) : Holder<F, R>()
+        class Failure<F : Fields, R : Record<F>>(val error: Error) : Holder<F, R>() {
+            @Serializable
+            data class ReadError(val records: List<Error>)
+        }
+    }
 }

@@ -48,8 +48,8 @@ public class Storage(
     public fun <F : Record.Fields, R : Record<F>> get(
         recordName: String,
         recordInformation: Record.Information<F, R>
-    ): R {
-        return storage[recordName]!! as R
+    ): R? {
+        return storage[recordName]?.let { it as R }
     }
 
     public fun <F : Record.Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>) {
