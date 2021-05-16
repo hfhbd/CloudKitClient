@@ -1,7 +1,7 @@
-rootProject.name = "cloudkit-client"
+rootProject.name = "cloudkitclient"
 
-include(":core")
-include(":testing")
+include(":cloudkitclient-core")
+include(":cloudkitclient-testing")
 
 val keyID: String? = System.getProperty("keyID")
 if (keyID != null) {

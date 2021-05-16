@@ -13,12 +13,12 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":core"))
+                implementation(project(":cloudkitclient-core"))
             }
         }
         commonTest {
             dependencies {
-                implementation(project(":testing"))
+                implementation(project(":cloudkitclient-testing"))
                 implementation(kotlin("test"))
             }
         }
