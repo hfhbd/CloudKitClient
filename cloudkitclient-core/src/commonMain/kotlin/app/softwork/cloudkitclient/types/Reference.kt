@@ -1,11 +1,14 @@
 package app.softwork.cloudkitclient.types
 
-import app.softwork.cloudkitclient.ZoneID
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import app.softwork.cloudkitclient.*
+import kotlinx.serialization.*
 
 @Serializable
-public data class Reference(val recordName: String, val zoneID: ZoneID, val action: Action) {
+public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
+    val recordName: String,
+    val zoneID: ZoneID? = null,
+    val action: Action
+) {
     @Serializable
     public enum class Action {
         @SerialName("None")

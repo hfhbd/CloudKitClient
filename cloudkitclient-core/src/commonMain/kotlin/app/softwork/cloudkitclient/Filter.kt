@@ -1,5 +1,6 @@
 package app.softwork.cloudkitclient
 
+import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
 import kotlin.reflect.*
@@ -48,8 +49,18 @@ public data class Filter(
 
     public class Builder<F : Record.Fields> {
 
-        public infix fun KProperty1<F, Value.String?>.eq(value: kotlin.String) {
+        public infix fun KProperty1<F, Value.String?>.eq(value: String) {
             filters.add(Filter(fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.String(value)))
+        }
+
+        public infix fun <TF : Record.Fields, TR : Record<TF>> KProperty1<F, Value.Reference<TF, TR>>.eq(value: TR) {
+            filters.add(
+                Filter(
+                    fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.Reference<TF, TR>(
+                        Reference(value.recordName, action = Reference.Action.None)
+                    )
+                )
+            )
         }
 
         private val filters = mutableListOf<Filter>()

@@ -1,5 +1,6 @@
 package app.softwork.cloudkitclient.values
 
+import app.softwork.cloudkitclient.*
 import app.softwork.cloudkitclient.internal.*
 import kotlinx.datetime.*
 import kotlinx.serialization.*
@@ -45,7 +46,9 @@ public sealed class Value {
 
     @Serializable
     @SerialName("REFERENCE")
-    public data class Reference(val value: app.softwork.cloudkitclient.types.Reference) : Value()
+    public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
+        val value: app.softwork.cloudkitclient.types.Reference<F, TargetRecord>
+    ) : Value()
 
 
     @Serializable
