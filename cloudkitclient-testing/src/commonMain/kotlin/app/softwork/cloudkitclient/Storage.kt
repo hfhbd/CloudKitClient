@@ -225,11 +225,11 @@ public class Storage(
                 }
             }
             is Value.Location -> TODO()
-            is Value.Reference -> {
-                require(otherValue is Reference)
+            is Value.Reference<*, *> -> {
+                require(otherValue is Reference<*, *>)
                 when (comparator) {
-                    EQUALS -> TODO()
-                    NOT_EQUALS -> TODO()
+                    EQUALS -> value.recordName == otherValue.value.recordName
+                    NOT_EQUALS -> value.recordName != otherValue.value.recordName
                     LESS_THAN -> TODO()
                     LESS_THAN_OR_EQUALS -> TODO()
                     GREATER_THAN -> TODO()

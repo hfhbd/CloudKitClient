@@ -212,6 +212,7 @@ public final class app/softwork/cloudkitclient/Filter$$serializer : kotlinx/seri
 public final class app/softwork/cloudkitclient/Filter$Builder {
 	public fun <init> ()V
 	public final fun build ()Ljava/util/List;
+	public final fun eq (Lkotlin/reflect/KProperty1;Lapp/softwork/cloudkitclient/Record;)V
 	public final fun eq (Lkotlin/reflect/KProperty1;Ljava/lang/String;)V
 }
 
@@ -1076,6 +1077,7 @@ public final class app/softwork/cloudkitclient/types/Reference {
 	public static final field Companion Lapp/softwork/cloudkitclient/types/Reference$Companion;
 	public synthetic fun <init> (ILjava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Lapp/softwork/cloudkitclient/types/Reference$Action;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Lapp/softwork/cloudkitclient/types/Reference$Action;)V
+	public synthetic fun <init> (Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Lapp/softwork/cloudkitclient/types/Reference$Action;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Lapp/softwork/cloudkitclient/ZoneID;
 	public final fun component3 ()Lapp/softwork/cloudkitclient/types/Reference$Action;
@@ -1090,8 +1092,8 @@ public final class app/softwork/cloudkitclient/types/Reference {
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Reference$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Reference;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -1127,7 +1129,7 @@ public final class app/softwork/cloudkitclient/types/Reference$Action$Companion 
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
 public abstract class app/softwork/cloudkitclient/values/Value {
@@ -1383,8 +1385,8 @@ public final class app/softwork/cloudkitclient/values/Value$Reference : app/soft
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/values/Value$Reference$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/values/Value$Reference;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -1395,7 +1397,7 @@ public final class app/softwork/cloudkitclient/values/Value$Reference$$serialize
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Reference$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/values/Value$String : app/softwork/cloudkitclient/values/Value {
