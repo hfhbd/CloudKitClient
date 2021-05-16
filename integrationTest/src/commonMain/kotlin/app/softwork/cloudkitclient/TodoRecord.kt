@@ -5,7 +5,6 @@ import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
 import kotlinx.uuid.*
-import kotlin.reflect.*
 
 data class Todo(val id: UUID, val subtitle: String, val asset: Asset?, val changeTag: String? = null)
 
@@ -23,15 +22,20 @@ data class TodoRecord(
 ) : Record<TodoRecord.Fields> {
     override val recordType: String = Companion.recordType
 
-    fun toDomain() = Todo(id = recordName.toUUID(), subtitle = fields.subtitle.value, asset = fields.asset?.value, changeTag = recordChangeTag)
+    fun toDomain() = Todo(
+        id = recordName.toUUID(),
+        subtitle = fields.subtitle.value,
+        asset = fields.asset?.value,
+        changeTag = recordChangeTag
+    )
 
     constructor(todo: Todo) : this(
         todo.id.toString(),
-        fields = Fields(subtitle = Value.String(todo.subtitle)),
+        fields = Fields(subtitle = Value.String(todo.subtitle), asset = todo.asset?.let { Value.Asset(it) }),
         recordChangeTag = todo.changeTag
     )
 
-    companion object : Information<TodoRecord.Fields, TodoRecord> {
+    companion object : Information<Fields, TodoRecord> {
         override val recordType: String = "Todo"
 
         override fun fields() = listOf(Fields::subtitle)
