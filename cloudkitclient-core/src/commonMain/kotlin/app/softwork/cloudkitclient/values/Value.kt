@@ -13,10 +13,6 @@ public sealed class Value {
     public data class Asset(val value: app.softwork.cloudkitclient.types.Asset) : Value()
 
     @Serializable
-    @SerialName("BOOLEAN")
-    public data class Boolean(val value: kotlin.Boolean) : Value()
-
-    @Serializable
     @SerialName("BYTE")
     public data class Byte(
         @SerialName("value")
@@ -27,12 +23,9 @@ public sealed class Value {
     }
 
     @Serializable
-    @SerialName("DATETIME")
-    public data class DateTime(@SerialName("value") private val milliseconds: Long) : Value() {
-        public val value: Instant get() = Instant.fromEpochMilliseconds(milliseconds)
+    @SerialName("LOCATION")
+    public data class Location(val value: app.softwork.cloudkitclient.types.Location) : Value()
 
-        public constructor(instant: Instant): this(instant.toEpochMilliseconds())
-    }
 
     @Serializable
     @SerialName("DOUBLE")
@@ -40,11 +33,8 @@ public sealed class Value {
 
     @Serializable
     @SerialName("INT")
-    public data class Int(val value: kotlin.Int) : Value()
+    public data class Number(val value: kotlin.Long) : Value()
 
-    @Serializable
-    @SerialName("LOCATION")
-    public data class Location(val value: app.softwork.cloudkitclient.types.Location) : Value()
 
     @Serializable
     @SerialName("REFERENCE")
@@ -61,6 +51,16 @@ public sealed class Value {
     @Serializable
     @SerialName("STRING")
     public data class String(val value: kotlin.String) : Value()
+
+
+    @Serializable
+    @SerialName("DATETIME")
+    public data class DateTime(@SerialName("value") private val milliseconds: Long) : Value() {
+        public val value: Instant get() = Instant.fromEpochMilliseconds(milliseconds)
+
+        public constructor(instant: Instant) : this(instant.toEpochMilliseconds())
+    }
+
 
     @Serializable
     @SerialName("LIST")

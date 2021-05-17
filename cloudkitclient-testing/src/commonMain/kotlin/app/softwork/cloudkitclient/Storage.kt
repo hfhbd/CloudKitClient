@@ -139,10 +139,6 @@ public class Storage(
 
     private fun Value.asComparable(): Comparable<Value> {
         return when (this) {
-            is Value.Boolean -> comparable {
-                require(it is Value.Boolean)
-                value.compareTo(it.value)
-            }
             is Value.Double -> comparable {
                 require(it is Value.Double)
                 value.compareTo(it.value)
@@ -178,7 +174,6 @@ public class Storage(
         val comparator = filter.comparator
         return when (this) {
             is Value.Asset -> error("Not comparable")
-            is Value.Boolean -> error("Not comparable")
             is Value.Byte -> error("Not comparable")
             is Value.DateTime -> {
                 require(otherValue is DateTime)
@@ -195,7 +190,7 @@ public class Storage(
             is Value.Double -> {
                 val other = when (otherValue) {
                     is Value.Double -> otherValue.value
-                    is Value.Int -> otherValue.value.toDouble()
+                    is Value.Number -> otherValue.value.toDouble()
                     else -> error("Not comparable")
                 }
                 when (comparator) {
@@ -208,10 +203,10 @@ public class Storage(
                     else -> error("Not supported")
                 }
             }
-            is Value.Int -> {
+            is Value.Number -> {
                 val other = when (otherValue) {
-                    is Value.Double -> otherValue.value.toInt()
-                    is Value.Int -> otherValue.value
+                    is Value.Double -> otherValue.value.toLong()
+                    is Value.Number -> otherValue.value
                     else -> error("Not comparable")
                 }
                 when (comparator) {
@@ -254,7 +249,7 @@ public class Storage(
                 val other = when (otherValue) {
                     is Value.String -> otherValue.value
                     is Value.Double -> otherValue.value.toString()
-                    is Value.Int -> otherValue.value.toString()
+                    is Value.Number -> otherValue.value.toString()
                     else -> error("Not comparable")
                 }
                 when (comparator) {
@@ -273,7 +268,7 @@ public class Storage(
                 val other = when (otherValue) {
                     is Value.String -> otherValue.value
                     is Value.Double -> otherValue.value.toString()
-                    is Value.Int -> otherValue.value.toString()
+                    is Value.Number -> otherValue.value.toString()
                     else -> error("Not comparable")
                 }
                 when (comparator) {
