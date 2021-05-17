@@ -16,6 +16,7 @@ public final class app/softwork/cloudkitclient/Storage {
 public class app/softwork/cloudkitclient/TestClient : app/softwork/cloudkitclient/Client {
 	public fun <init> ()V
 	public fun download (Lapp/softwork/cloudkitclient/types/Asset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getLogging ()Lkotlin/jvm/functions/Function1;
 	public synthetic fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
 	public fun getPrivateDB ()Lapp/softwork/cloudkitclient/TestDatabase;
 	public synthetic fun getPublicDB ()Lapp/softwork/cloudkitclient/Client$Database;

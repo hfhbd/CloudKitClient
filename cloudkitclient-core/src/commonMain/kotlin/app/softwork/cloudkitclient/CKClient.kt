@@ -16,6 +16,7 @@ public class CKClient(
     public val container: String,
     keyID: String,
     private val privateECPrime256v1Key: ByteArray,
+    override val logging: (String) -> Unit = { },
     public val environment: Environment = Environment.Development
 ) : Client {
 
@@ -179,7 +180,7 @@ public class CKClient(
 
         val date = Clock.System.now().toString().dropLastWhile { it != '.' }.replace('.', 'Z')
         val body = json.encodeToString(serializer, requestBody())
-        println("body: $body")
+        logging("body: $body")
         val bodySignature = sha256(body).encodeBase64
         val signature = ecdsa(privateECPrime256v1Key, "$date:$bodySignature:$subPath")
 
@@ -188,7 +189,7 @@ public class CKClient(
         header("X-Apple-CloudKit-Request-SignatureV1", signature)
         this.body = body
     }.also {
-        println("response: $it")
+        logging("response: $it")
     }
 
 

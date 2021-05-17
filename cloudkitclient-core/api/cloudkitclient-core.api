@@ -1,10 +1,11 @@
 public final class app/softwork/cloudkitclient/CKClient : app/softwork/cloudkitclient/Client {
 	public static final field Companion Lapp/softwork/cloudkitclient/CKClient$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLapp/softwork/cloudkitclient/Environment;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;[BLapp/softwork/cloudkitclient/Environment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;[BLkotlin/jvm/functions/Function1;Lapp/softwork/cloudkitclient/Environment;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;[BLkotlin/jvm/functions/Function1;Lapp/softwork/cloudkitclient/Environment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun download (Lapp/softwork/cloudkitclient/types/Asset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun getContainer ()Ljava/lang/String;
 	public final fun getEnvironment ()Lapp/softwork/cloudkitclient/Environment;
+	public fun getLogging ()Lkotlin/jvm/functions/Function1;
 	public fun getPrivateDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
 	public synthetic fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
 	public fun getPublicDB ()Lapp/softwork/cloudkitclient/CKClient$Database;
@@ -28,6 +29,7 @@ public final class app/softwork/cloudkitclient/CKClient$Database : app/softwork/
 
 public abstract interface class app/softwork/cloudkitclient/Client {
 	public abstract fun download (Lapp/softwork/cloudkitclient/types/Asset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getLogging ()Lkotlin/jvm/functions/Function1;
 	public abstract fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
 	public abstract fun getPublicDB ()Lapp/softwork/cloudkitclient/Client$Database;
 	public abstract fun getSharedDB ()Lapp/softwork/cloudkitclient/Client$Database;
