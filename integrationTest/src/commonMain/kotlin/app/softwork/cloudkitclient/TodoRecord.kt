@@ -6,7 +6,12 @@ import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
 import kotlinx.uuid.*
 
-data class Todo(val id: UUID, val subtitle: String, val asset: Asset?, val changeTag: String? = null)
+data class Todo(
+    val id: UUID,
+    val subtitle: String, val asset: Asset?,
+    val listID: String,
+    val changeTag: String? = null
+)
 
 @Serializable
 data class TodoRecord(
@@ -26,23 +31,31 @@ data class TodoRecord(
         id = recordName.toUUID(),
         subtitle = fields.subtitle.value,
         asset = fields.asset?.value,
-        changeTag = recordChangeTag
+        changeTag = recordChangeTag,
+        listID = fields.list.value.recordName
     )
 
     constructor(todo: Todo) : this(
         todo.id.toString(),
-        fields = Fields(subtitle = Value.String(todo.subtitle), asset = todo.asset?.let { Value.Asset(it) }),
+        fields = Fields(
+            subtitle = Value.String(todo.subtitle),
+            asset = todo.asset?.let { Value.Asset(it) },
+            list = Value.Reference(value = Value.Reference.Ref(todo.listID))),
         recordChangeTag = todo.changeTag
     )
 
     companion object : Information<Fields, TodoRecord> {
         override val recordType: String = "Todo"
 
-        override fun fields() = listOf(Fields::subtitle)
+        override fun fields() = listOf(Fields::subtitle, Fields::asset, Fields::list)
 
         override fun fieldsSerializer() = Fields.serializer()
     }
 
     @Serializable
-    data class Fields(val subtitle: Value.String, val asset: Value.Asset? = null) : Record.Fields
+    data class Fields(
+        val subtitle: Value.String,
+        val asset: Value.Asset? = null,
+        val list: Value.Reference<TodoListRecord.Fields, TodoListRecord>
+    ) : Record.Fields
 }

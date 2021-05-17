@@ -58,7 +58,12 @@ public class CKClient(
                     sortBy = Sort.Builder<F>().apply(sort).build()
                 )
             )
-        }.toRegularResponse(recordInformation)
+        }.toResponse(recordInformation) {
+            when(this) {
+                is Holder.Success -> response.records
+                is Holder.Failure -> throw error
+            }
+        }
 
         public override suspend fun <F : Fields, R : Record<F>> create(
             record: R,
@@ -73,7 +78,12 @@ public class CKClient(
                 )
             ) {
                 OperationsRequest(operations = listOf(Create(record = record)))
-            }.toRegularResponse(recordInformation).first()
+            }.toResponse(recordInformation) {
+                when(this) {
+                    is Holder.Success -> response.records.single()
+                    is Holder.Failure -> throw error
+                }
+            }
 
         override suspend fun <F : Fields, R : Record<F>> read(
             recordName: String,
@@ -81,7 +91,7 @@ public class CKClient(
             zoneID: ZoneID
         ): R? = request("/records/lookup", Request.RecordLookup.serializer()) {
             Request.RecordLookup(listOf(Request.RecordLookup.RecordName(recordName = recordName)), zoneID = zoneID)
-        }.handleError(recordInformation).run {
+        }.toResponse(recordInformation) {
             when (this) {
                 is Holder.Success -> response.records.single()
                 is Holder.Failure -> {
@@ -103,7 +113,12 @@ public class CKClient(
                 )
             ) {
                 OperationsRequest(operations = listOf(Update(record = record)))
-            }.toRegularResponse(recordInformation).first()
+            }.toResponse(recordInformation) {
+                when(this) {
+                    is Holder.Success -> response.records.single()
+                    is Holder.Failure -> throw error
+                }
+            }
 
         public override suspend fun <F : Fields, R : Record<F>> delete(
             record: R,
@@ -157,14 +172,14 @@ public class CKClient(
         resource: String,
         serializer: KSerializer<In>,
         requestBody: () -> In
-    ): String = client.request {
+    ): String = client.request<String> {
         method = HttpMethod.Post
 
         val subPath = "/database/1/$container/$environment/$name$resource"
 
         val date = Clock.System.now().toString().dropLastWhile { it != '.' }.replace('.', 'Z')
         val body = json.encodeToString(serializer, requestBody())
-
+        println("body: $body")
         val bodySignature = sha256(body).encodeBase64
         val signature = ecdsa(privateECPrime256v1Key, "$date:$bodySignature:$subPath")
 
@@ -172,22 +187,15 @@ public class CKClient(
         header("X-Apple-CloudKit-Request-ISO8601Date", date)
         header("X-Apple-CloudKit-Request-SignatureV1", signature)
         this.body = body
-    }
-
-    private fun <F : Fields, R : Record<F>> String.toRegularResponse(recordInformation: Information<F, R>): List<R> {
-        val response = json.decodeFromString(
-            Response.serializer(
-                recordInformation.fieldsSerializer(),
-                recordInformation.serializer()
-            ), this
-        )
-        return response.records
+    }.also {
+        println("response: $it")
     }
 
 
-    private fun <F : Fields, R : Record<F>> String.handleError(
-        recordInformation: Information<F, R>
-    ): Holder<F, R> =
+    private fun <F : Fields, R : Record<F>, T> String.toResponse(
+        recordInformation: Information<F, R>,
+        handler: Holder<F, R>.() -> T
+    ): T =
         try {
             val response = json.decodeFromString(
                 Response.serializer(
@@ -195,11 +203,11 @@ public class CKClient(
                     recordInformation.serializer()
                 ), this
             )
-            Holder.Success(response)
+            Holder.Success(response).handler()
         } catch (e: SerializationException) {
             try {
                 val error = json.decodeFromString(Holder.Failure.ReadError.serializer(), this)
-                Holder.Failure(error.records.first())
+                Holder.Failure<F, R>(error.records.first()).handler()
             } catch (error: SerializationException) {
                 throw error
             }
