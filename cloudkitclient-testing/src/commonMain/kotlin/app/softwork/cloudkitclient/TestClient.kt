@@ -4,6 +4,7 @@ import app.softwork.cloudkitclient.types.*
 import kotlinx.uuid.*
 
 public open class TestClient : Client {
+    override val logging: (String) -> Unit = { println(it) }
     private val assets: MutableMap<UUID, Pair<Asset, ByteArray>> =
         mutableMapOf()
 

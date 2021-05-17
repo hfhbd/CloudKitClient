@@ -7,6 +7,8 @@ import app.softwork.cloudkitclient.values.*
 import kotlin.reflect.*
 
 public interface Client {
+    public val logging: (String) -> Unit
+
     public suspend fun download(assetToDownload: Asset): ByteArray
 
     public val publicDB: Database
