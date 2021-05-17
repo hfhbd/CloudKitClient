@@ -1231,6 +1231,7 @@ public final class app/softwork/cloudkitclient/values/Value$DateTime : app/softw
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$DateTime$Companion;
 	public synthetic fun <init> (IJLkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (J)V
+	public fun <init> (Lkotlinx/datetime/Instant;)V
 	public final fun copy (J)Lapp/softwork/cloudkitclient/values/Value$DateTime;
 	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$DateTime;JILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$DateTime;
 	public fun equals (Ljava/lang/Object;)Z

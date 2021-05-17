@@ -30,6 +30,8 @@ public sealed class Value {
     @SerialName("DATETIME")
     public data class DateTime(@SerialName("value") private val milliseconds: Long) : Value() {
         public val value: Instant get() = Instant.fromEpochMilliseconds(milliseconds)
+
+        public constructor(instant: Instant): this(instant.toEpochMilliseconds())
     }
 
     @Serializable
