@@ -1375,6 +1375,7 @@ public final class app/softwork/cloudkitclient/values/Value$Location$Companion {
 public final class app/softwork/cloudkitclient/values/Value$Reference : app/softwork/cloudkitclient/values/Value {
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Reference$Companion;
 	public synthetic fun <init> (ILapp/softwork/cloudkitclient/values/Value$Reference$Ref;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lapp/softwork/cloudkitclient/Record;)V
 	public fun <init> (Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;)V
 	public final fun component1 ()Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;
 	public final fun copy (Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;)Lapp/softwork/cloudkitclient/values/Value$Reference;
