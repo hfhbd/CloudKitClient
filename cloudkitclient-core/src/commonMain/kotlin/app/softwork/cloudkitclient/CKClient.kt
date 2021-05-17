@@ -4,8 +4,10 @@ import app.softwork.cloudkitclient.Record.*
 import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
+import io.ktor.client.call.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.datetime.*
 import kotlinx.serialization.*
@@ -59,12 +61,7 @@ public class CKClient(
                     sortBy = Sort.Builder<F>().apply(sort).build()
                 )
             )
-        }.toResponse(recordInformation) {
-            when(this) {
-                is Holder.Success -> response.records
-                is Holder.Failure -> throw error
-            }
-        }
+        }.toResponse(recordInformation)
 
         public override suspend fun <F : Fields, R : Record<F>> create(
             record: R,
@@ -79,27 +76,24 @@ public class CKClient(
                 )
             ) {
                 OperationsRequest(operations = listOf(Create(record = record)))
-            }.toResponse(recordInformation) {
-                when(this) {
-                    is Holder.Success -> response.records.single()
-                    is Holder.Failure -> throw error
-                }
-            }
+            }.toResponse(recordInformation).single()
+
 
         override suspend fun <F : Fields, R : Record<F>> read(
             recordName: String,
             recordInformation: Information<F, R>,
             zoneID: ZoneID
-        ): R? = request("/records/lookup", Request.RecordLookup.serializer()) {
-            Request.RecordLookup(listOf(Request.RecordLookup.RecordName(recordName = recordName)), zoneID = zoneID)
-        }.toResponse(recordInformation) {
-            when (this) {
-                is Holder.Success -> response.records.single()
-                is Holder.Failure -> {
-                    if (error.serverErrorCode == "NOT_FOUND") null else throw error
-                }
-            }
+        ): R? = try {
+            request("/records/lookup", Request.RecordLookup.serializer()) {
+                Request.RecordLookup(
+                    listOf(Request.RecordLookup.RecordName(recordName = recordName)),
+                    zoneID = zoneID
+                )
+            }.toResponse(recordInformation).single()
+        } catch (error: Error) {
+            if (error.serverErrorCode == "NOT_FOUND") null else throw error
         }
+
 
         public override suspend fun <F : Fields, R : Record<F>> update(
             record: R,
@@ -114,12 +108,7 @@ public class CKClient(
                 )
             ) {
                 OperationsRequest(operations = listOf(Update(record = record)))
-            }.toResponse(recordInformation) {
-                when(this) {
-                    is Holder.Success -> response.records.single()
-                    is Holder.Failure -> throw error
-                }
-            }
+            }.toResponse(recordInformation).single()
 
         public override suspend fun <F : Fields, R : Record<F>> delete(
             record: R,
@@ -155,7 +144,7 @@ public class CKClient(
                     ), zoneID = zoneID
                 )
             }.let {
-                json.decodeFromString(Asset.Upload.Response.serializer(), it)
+                json.decodeFromString(Asset.Upload.Response.serializer(), it.receive())
             }.tokens.first().let {
                 httpClient { }.post<String>(it.url) { body = asset }
             }.let {
@@ -165,7 +154,7 @@ public class CKClient(
         override suspend fun createToken(): Push.Response = request("/tokens/create", Push.Create.serializer()) {
             Push.Create(environment)
         }.let {
-            json.decodeFromString(Push.Response.serializer(), it)
+            json.decodeFromString(Push.Response.serializer(), it.receive())
         }
     }
 
@@ -173,14 +162,14 @@ public class CKClient(
         resource: String,
         serializer: KSerializer<In>,
         requestBody: () -> In
-    ): String = client.request<String> {
+    ): HttpResponse = client.request {
         method = HttpMethod.Post
 
         val subPath = "/database/1/$container/$environment/$name$resource"
 
         val date = Clock.System.now().toString().dropLastWhile { it != '.' }.replace('.', 'Z')
         val body = json.encodeToString(serializer, requestBody())
-        logging("body: $body")
+        logging("request: $body")
         val bodySignature = sha256(body).encodeBase64
         val signature = ecdsa(privateECPrime256v1Key, "$date:$bodySignature:$subPath")
 
@@ -188,37 +177,27 @@ public class CKClient(
         header("X-Apple-CloudKit-Request-ISO8601Date", date)
         header("X-Apple-CloudKit-Request-SignatureV1", signature)
         this.body = body
-    }.also {
-        logging("response: $it")
     }
 
 
-    private fun <F : Fields, R : Record<F>, T> String.toResponse(
-        recordInformation: Information<F, R>,
-        handler: Holder<F, R>.() -> T
-    ): T =
+    private suspend fun <F : Fields, R : Record<F>> HttpResponse.toResponse(
+        recordInformation: Information<F, R>
+    ): List<R> {
+        val body = receive<String>()
+        logging("response ($status): $body")
         try {
-            val response = json.decodeFromString(
+            return json.decodeFromString(
                 Response.serializer(
                     recordInformation.fieldsSerializer(),
                     recordInformation.serializer()
-                ), this
-            )
-            Holder.Success(response).handler()
-        } catch (e: SerializationException) {
-            try {
-                val error = json.decodeFromString(Holder.Failure.ReadError.serializer(), this)
-                Holder.Failure<F, R>(error.records.first()).handler()
-            } catch (error: SerializationException) {
-                throw error
-            }
-        }
+                ), body
+            ).records
 
-    private sealed class Holder<F : Fields, R : Record<F>> {
-        class Success<F : Fields, R : Record<F>>(val response: Response<F, R>) : Holder<F, R>()
-        class Failure<F : Fields, R : Record<F>>(val error: Error) : Holder<F, R>() {
-            @Serializable
-            data class ReadError(val records: List<Error>)
+        } catch (error: SerializationException) {
+            throw json.decodeFromString(ResponseError.serializer(), body).records.firstOrNull() ?: throw error
         }
     }
+
+    @Serializable
+    private data class ResponseError(val records: List<Error>)
 }
