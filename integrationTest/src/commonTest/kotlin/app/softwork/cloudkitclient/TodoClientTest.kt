@@ -11,24 +11,37 @@ class TodoClientTest {
 
     @Test
     fun createTodo() = runTest(clients) { client ->
+        val list = client.publicDB.create(TodoListRecord("MainList"), TodoListRecord)
+
         val todo = client.publicDB.create(
             TodoRecord(
                 UUID().toString(),
-                TodoRecord.Fields(subtitle = Value.String("Hello World"))
+                TodoRecord.Fields(subtitle = Value.String("Hello World"), list = Value.Reference(list))
             ), TodoRecord
         )
         delay(timeMillis = client.timeout)
         val todos = client.publicDB.query(TodoRecord)
         assertEquals(1, todos.size)
+
+        val todosOfList = client.publicDB.query(TodoRecord) {
+            TodoRecord.Fields::list eq list
+        }
+        assertEquals(1, todosOfList.size)
+
         client.publicDB.delete(todo, TodoRecord)
         delay(timeMillis = client.timeout)
         val todos2 = client.publicDB.query(TodoRecord)
         assertEquals(0, todos2.size)
+        client.publicDB.delete(list, TodoListRecord)
     }
 
     @Test
     fun createTodoDomain() = runTest(clients) { client ->
-        val todo = client.publicDB.create(TodoRecord(Todo(UUID(), "Hello World", asset = null)), TodoRecord).toDomain()
+        val list = client.publicDB.create(TodoListRecord("MainList"), TodoListRecord)
+        val todo = client.publicDB.create(
+            TodoRecord(Todo(UUID(), "Hello World", asset = null, listID = "MainList")),
+            TodoRecord
+        ).toDomain()
         delay(timeMillis = client.timeout)
         val todos = client.publicDB.query(TodoRecord).map { it.toDomain() }
         assertEquals(1, todos.size)
@@ -36,6 +49,7 @@ class TodoClientTest {
         delay(timeMillis = client.timeout)
         val todos2 = client.publicDB.query(TodoRecord).map { it.toDomain() }
         assertEquals(0, todos2.size)
+        client.publicDB.delete(list, TodoListRecord)
     }
 
     @Test
@@ -43,10 +57,15 @@ class TodoClientTest {
         val assetContent = "Hello Asset".encodeToByteArray()
         val asset = client.publicDB.upload(assetContent, TodoRecord, TodoRecord.Fields::asset, recordName = "TestAsset")
 
+        val list = client.publicDB.create(TodoListRecord("MainList"), TodoListRecord)
+
         client.publicDB.create(
             TodoRecord(
                 UUID().toString(),
-                TodoRecord.Fields(subtitle = Value.String("Hello World"))
+                TodoRecord.Fields(
+                    subtitle = Value.String("Hello World"),
+                    list = Value.Reference(Value.Reference.Ref("MainList"))
+                )
             ), TodoRecord
         )
         delay(timeMillis = client.timeout)
@@ -60,6 +79,7 @@ class TodoClientTest {
             client.publicDB.update(updatedTodo.copy(fields = todo.fields.copy(asset = null)), TodoRecord)
         assertNull(todoDeletedAsset.fields.asset)
         client.publicDB.delete(todoDeletedAsset, TodoRecord)
+        client.publicDB.delete(list, TodoListRecord)
     }
 
     @Test

@@ -49,8 +49,13 @@ public sealed class Value {
     @Serializable
     @SerialName("REFERENCE")
     public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
-        val value: app.softwork.cloudkitclient.types.Reference<F, TargetRecord>
-    ) : Value()
+        val value: Ref<F, TargetRecord>
+    ) : Value() {
+        public constructor(record: TargetRecord): this(Ref(recordName = record.recordName))
+
+        @Serializable
+        public data class Ref<F : Record.Fields, TargetRecord : Record<F>>(val recordName: kotlin.String)
+    }
 
 
     @Serializable

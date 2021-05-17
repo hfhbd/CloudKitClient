@@ -1,6 +1,5 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
 import kotlinx.serialization.*
 import kotlin.reflect.*
@@ -56,8 +55,8 @@ public data class Filter(
         public infix fun <TF : Record.Fields, TR : Record<TF>> KProperty1<F, Value.Reference<TF, TR>>.eq(value: TR) {
             filters.add(
                 Filter(
-                    fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.Reference<TF, TR>(
-                        Reference(value.recordName, action = Reference.Action.None)
+                    fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.Reference(
+                        Value.Reference.Ref<TF, TR>(value.recordName)
                     )
                 )
             )
