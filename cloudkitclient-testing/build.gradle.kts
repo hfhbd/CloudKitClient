@@ -15,7 +15,7 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":cloudkitclient-core"))
-                api("app.softwork:kotlinx-uuid-core:0.0.5")
+                api("app.softwork:kotlinx-uuid-core:0.0.6")
             }
         }
         commonTest {
