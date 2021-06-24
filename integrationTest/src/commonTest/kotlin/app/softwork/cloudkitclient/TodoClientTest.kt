@@ -87,5 +87,5 @@ class TodoClientTest {
         assertNull(client.publicDB.read("TestingNotFound", TodoRecord))
     }
 
-    private val Client.timeout get() = if (this is TestClient) 0L else 2500L
+    private val Client.timeout get() = if (this is TestClient) 0L else 5000L
 }
