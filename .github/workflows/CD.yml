@@ -2,12 +2,12 @@ name: CD
 
 on:
   release:
-    types: [created]
+    types: [ created ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Build all modules with Gradle
-        run: ./gradlew -Pall=true -Dcontainer=${{ secrets.CONTAINER }} -DkeyID=${{ secrets.KEYID }} -DprivateKey=${{ secrets.PRIVATEKEY }} build
+        run: ./gradlew build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish

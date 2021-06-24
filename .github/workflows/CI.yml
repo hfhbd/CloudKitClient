@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,6 +18,6 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Build all modules with Gradle
-        run: ./gradlew -Pall=true -Dcontainer=${{ secrets.CONTAINER }} -DkeyID=${{ secrets.KEYID }} -DprivateKey=${{ secrets.PRIVATEKEY }} build
+        run: ./gradlew build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
