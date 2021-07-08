@@ -17,7 +17,7 @@ kotlin {
         commonMain {
             dependencies {
                 api("io.ktor:ktor-client-core:$ktorVersion")
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
             }
         }
