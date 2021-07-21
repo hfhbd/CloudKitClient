@@ -14,14 +14,5 @@ subprojects {
 
     repositories {
         mavenCentral()
-
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/hfhbd/*")
-            credentials {
-                username = System.getProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-                password = System.getProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
     }
 }
