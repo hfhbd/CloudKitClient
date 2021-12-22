@@ -33,6 +33,7 @@ class TodoClientTest {
         val todos2 = client.publicDB.query(TodoRecord)
         assertEquals(0, todos2.size)
         client.publicDB.delete(list, TodoListRecord)
+        delay(timeMillis = client.timeout)
     }
 
     @Test
@@ -50,6 +51,7 @@ class TodoClientTest {
         val todos2 = client.publicDB.query(TodoRecord).map { it.toDomain() }
         assertEquals(0, todos2.size)
         client.publicDB.delete(list, TodoListRecord)
+        delay(timeMillis = client.timeout)
     }
 
     @Test
@@ -80,6 +82,7 @@ class TodoClientTest {
         assertNull(todoDeletedAsset.fields.asset)
         client.publicDB.delete(todoDeletedAsset, TodoRecord)
         client.publicDB.delete(list, TodoListRecord)
+        delay(timeMillis = client.timeout)
     }
 
     @Test

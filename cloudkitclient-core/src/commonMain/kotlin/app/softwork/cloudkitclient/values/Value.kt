@@ -33,7 +33,7 @@ public sealed class Value {
 
     @Serializable
     @SerialName("INT")
-    public data class Number(val value: kotlin.Long) : Value()
+    public data class Number(val value: Long) : Value()
 
 
     @Serializable
