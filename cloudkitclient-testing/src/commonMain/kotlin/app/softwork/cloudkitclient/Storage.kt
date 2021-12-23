@@ -90,7 +90,6 @@ public class Storage(
         return asset
     }
 
-    @OptIn(ExperimentalTime::class)
     public fun <F : Record.Fields, R : Record<F>> query(
         recordInformation: Information<F, R>,
         filters: List<Filter>?,

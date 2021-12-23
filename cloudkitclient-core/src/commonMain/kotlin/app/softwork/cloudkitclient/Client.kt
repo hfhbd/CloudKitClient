@@ -35,7 +35,7 @@ public interface Client {
 
         public suspend fun <F : Fields, R : Record<F>> upload(
             asset: ByteArray,
-            recordInformation: Record.Information<F, R>,
+            recordInformation: Information<F, R>,
             field: KProperty1<F, Value.Asset?>,
             recordName: String?,
             zoneID: ZoneID = ZoneID.default

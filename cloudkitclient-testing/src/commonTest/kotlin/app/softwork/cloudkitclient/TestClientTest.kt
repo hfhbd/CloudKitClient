@@ -22,7 +22,7 @@ class TestClientTest {
     }
 
     @Test
-    fun queryFind() {
+    fun queryFound() {
         val client = TestClient()
         val defaultZone = client.publicDB.zones.values.first()
         val filter = Filter.Builder<UserRecord.Fields>().apply {
@@ -36,7 +36,7 @@ class TestClientTest {
     }
 
     @Test
-    fun queryNoFind() {
+    fun queryNotFound() {
         val client = TestClient()
         val defaultZone = client.publicDB.zones.values.first()
         val filter = Filter.Builder<UserRecord.Fields>().apply {

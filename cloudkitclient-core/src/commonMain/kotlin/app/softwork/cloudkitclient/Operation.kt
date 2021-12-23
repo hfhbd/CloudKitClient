@@ -4,7 +4,7 @@ import app.softwork.cloudkitclient.Record.*
 import kotlinx.serialization.*
 
 @Serializable
-public data class OperationsRequest<F: Fields, R : Record<F>, O: Operation<F, R>, >(
+public data class OperationsRequest<F: Fields, R : Record<F>, O: Operation<F, R>>(
     val operations: List<O>,
     val zoneID: ZoneID = ZoneID.default,
     val atomic: Boolean? = null,
