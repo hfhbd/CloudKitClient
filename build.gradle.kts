@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.6.10" apply false
+    kotlin("multiplatform") version "1.6.20" apply false
     kotlin("plugin.serialization") version "1.6.20" apply false
     `maven-publish`
     signing
