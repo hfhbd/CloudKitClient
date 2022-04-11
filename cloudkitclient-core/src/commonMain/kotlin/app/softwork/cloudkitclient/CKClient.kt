@@ -4,8 +4,7 @@ import app.softwork.cloudkitclient.Record.*
 import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
-import io.ktor.client.call.*
-import io.ktor.client.features.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -44,7 +43,8 @@ public class CKClient(
     public override val privateDB: Database = Database("private")
     public override val sharedDB: Database = Database("shared")
 
-    override suspend fun download(assetToDownload: Asset): ByteArray = httpClient { }.get(assetToDownload.downloadURL!!)
+    override suspend fun download(assetToDownload: Asset): ByteArray =
+        httpClient { }.get(assetToDownload.downloadURL!!).readBytes()
 
     public inner class Database internal constructor(internal val name: String) : Client.Database {
         public override suspend fun <F : Fields, R : Record<F>> query(
@@ -144,9 +144,9 @@ public class CKClient(
                     ), zoneID = zoneID
                 )
             }.let {
-                json.decodeFromString(Asset.Upload.Response.serializer(), it.receive())
+                json.decodeFromString(Asset.Upload.Response.serializer(), it.bodyAsText())
             }.tokens.first().let {
-                httpClient { }.post<String>(it.url) { body = asset }
+                httpClient { }.post(it.url) { setBody(asset) }.bodyAsText()
             }.let {
                 json.decodeFromString(Asset.Upload.Response.SingleFile.serializer(), it)
             }.singleFile
@@ -154,7 +154,7 @@ public class CKClient(
         override suspend fun createToken(): Push.Response = request("/tokens/create", Push.Create.serializer()) {
             Push.Create(environment)
         }.let {
-            json.decodeFromString(Push.Response.serializer(), it.receive())
+            json.decodeFromString(Push.Response.serializer(), it.bodyAsText())
         }
     }
 
@@ -176,14 +176,14 @@ public class CKClient(
         url.takeFrom(subPath)
         header("X-Apple-CloudKit-Request-ISO8601Date", date)
         header("X-Apple-CloudKit-Request-SignatureV1", signature)
-        this.body = body
+        setBody(body)
     }
 
 
     private suspend fun <F : Fields, R : Record<F>> HttpResponse.toResponse(
         recordInformation: Information<F, R>
     ): List<R> {
-        val body = receive<String>()
+        val body = bodyAsText()
         logging("response ($status): $body")
         try {
             return json.decodeFromString(
