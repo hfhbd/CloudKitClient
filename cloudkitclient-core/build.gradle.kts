@@ -12,7 +12,7 @@ kotlin {
 
     sourceSets {
         // Apache 2, https://github.com/ktorio/ktor/releases/latest
-        val ktorVersion = "1.6.8"
+        val ktorVersion = "2.0.0"
         commonMain {
             dependencies {
                 api("io.ktor:ktor-client-core:$ktorVersion")
