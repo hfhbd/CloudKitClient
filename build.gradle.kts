@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.6.21" apply false
-    kotlin("plugin.serialization") version "1.6.20" apply false
+    kotlin("plugin.serialization") version "1.6.21" apply false
     `maven-publish`
     signing
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
