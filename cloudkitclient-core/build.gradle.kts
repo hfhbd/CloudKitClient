@@ -17,7 +17,7 @@ kotlin {
             dependencies {
                 api("io.ktor:ktor-client-core:$ktorVersion")
                 api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.3.3")
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             }
         }
         commonTest {
