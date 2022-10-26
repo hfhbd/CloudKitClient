@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("org.jetbrains.dokka") version "1.7.20"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.0"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
 }
 
 kotlin {
