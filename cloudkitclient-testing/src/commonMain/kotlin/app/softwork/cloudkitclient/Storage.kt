@@ -107,7 +107,7 @@ public class Storage(
             }
         } ?: true
     }.let {
-        if (sorts != null && sorts.isNotEmpty()) {
+        if (!sorts.isNullOrEmpty()) {
             val properties = recordInformation.fields()
             var comparator = compareBy<R> { record ->
                 val sort = sorts.first()

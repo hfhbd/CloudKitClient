@@ -124,18 +124,6 @@ public final class app/softwork/cloudkitclient/Environment : java/lang/Enum {
 	public static fun values ()[Lapp/softwork/cloudkitclient/Environment;
 }
 
-public final class app/softwork/cloudkitclient/Environment$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Environment$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Environment;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Environment;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
 public final class app/softwork/cloudkitclient/Environment$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
@@ -249,18 +237,6 @@ public final class app/softwork/cloudkitclient/Filter$Comparator : java/lang/Enu
 	public static final field NOT_LIST_MEMBER_BEGINS_WITH Lapp/softwork/cloudkitclient/Filter$Comparator;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Filter$Comparator;
 	public static fun values ()[Lapp/softwork/cloudkitclient/Filter$Comparator;
-}
-
-public final class app/softwork/cloudkitclient/Filter$Comparator$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Filter$Comparator$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Filter$Comparator;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Filter$Comparator;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/Filter$Comparator$Companion {
@@ -1138,18 +1114,6 @@ public final class app/softwork/cloudkitclient/types/Reference$Action : java/lan
 	public static final field Validate Lapp/softwork/cloudkitclient/types/Reference$Action;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Reference$Action;
 	public static fun values ()[Lapp/softwork/cloudkitclient/types/Reference$Action;
-}
-
-public final class app/softwork/cloudkitclient/types/Reference$Action$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Reference$Action$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Reference$Action;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Reference$Action;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$Action$Companion {
