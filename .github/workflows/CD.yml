@@ -13,16 +13,13 @@ jobs:
       - uses: gradle/wrapper-validation-action@v1
       - name: Set environment for version
         run: long="${{ github.ref }}"; version=${long#"refs/tags/v"}; echo "version=${version}" >> $GITHUB_ENV
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: 11
+      - uses: gradle/gradle-build-action@v2
       - name: Build all modules with Gradle
-        run: ./gradlew build
+        run: ./gradlew build -Pversion=$version
       - name: Publish
         run: ./gradlew -Pversion=$version -Dorg.gradle.parallel=false publish closeAndReleaseStagingRepository
         env:
-          SIGNING_PRIVATE_KEY: ${{ secrets.SIGNING_PRIVATE_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-          SONARTYPE_APIKEY: ${{ secrets.SONARTYPE_APIKEY }}
-          SONARTYPE_APITOKEN: ${{ secrets.SONARTYPE_APITOKEN }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONARTYPE_APIKEY }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONARTYPE_APITOKEN }}

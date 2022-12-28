@@ -1,20 +1,16 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    id("org.jetbrains.dokka") version "1.7.20"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.12.1"
+    mpp
+    publish
+    licensee
 }
 
 kotlin {
-    explicitApi()
-
-    jvm()
-
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":cloudkitclient-core"))
+                api(projects.cloudkitclientCore)
                 api("app.softwork:kotlinx-uuid-core:0.0.17")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
             }
         }
         commonTest {

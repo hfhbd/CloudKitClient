@@ -1,20 +1,20 @@
-public final class app/softwork/cloudkitclient/Storage {
-	public fun <init> (Lapp/softwork/cloudkitclient/UserRecord;Ljava/util/Map;)V
-	public final fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
-	public final fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)V
-	public final fun get (Ljava/lang/String;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
-	public final fun getInitUser ()Lapp/softwork/cloudkitclient/UserRecord;
-	public final fun getStorage ()Ljava/util/Map;
-	public final fun now (Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/TimeInformation;
-	public static synthetic fun now$default (Lapp/softwork/cloudkitclient/Storage;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/TimeInformation;
-	public final fun query (Lapp/softwork/cloudkitclient/Record$Information;Ljava/util/List;Ljava/util/List;)Ljava/util/List;
-	public final fun randomChangeTag ()Ljava/lang/String;
-	public final fun update (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
-	public final fun upload ([BLapp/softwork/cloudkitclient/Record$Information;Lkotlin/reflect/KProperty1;Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Asset;
+public abstract interface class app/softwork/cloudkitclient/Storage {
+	public abstract fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public abstract fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)V
+	public abstract fun get (Ljava/lang/String;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public abstract fun now (Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/TimeInformation;
+	public abstract fun query (Lapp/softwork/cloudkitclient/Record$Information;Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+	public abstract fun randomChangeTag ()Ljava/lang/String;
+	public abstract fun update (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public abstract fun upload ([BLapp/softwork/cloudkitclient/Record$Information;Lkotlin/reflect/KProperty1;Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Asset;
 }
 
-public class app/softwork/cloudkitclient/TestClient : app/softwork/cloudkitclient/Client {
-	public fun <init> ()V
+public final class app/softwork/cloudkitclient/Storage$DefaultImpls {
+	public static synthetic fun now$default (Lapp/softwork/cloudkitclient/Storage;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/TimeInformation;
+}
+
+public final class app/softwork/cloudkitclient/TestClient : app/softwork/cloudkitclient/Client {
+	public fun <init> (Lkotlinx/datetime/Clock;)V
 	public fun download (Lapp/softwork/cloudkitclient/types/Asset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getLogging ()Lkotlin/jvm/functions/Function1;
 	public synthetic fun getPrivateDB ()Lapp/softwork/cloudkitclient/Client$Database;
@@ -25,10 +25,10 @@ public class app/softwork/cloudkitclient/TestClient : app/softwork/cloudkitclien
 	public fun getSharedDB ()Lapp/softwork/cloudkitclient/TestDatabase;
 }
 
-public class app/softwork/cloudkitclient/TestDatabase : app/softwork/cloudkitclient/Client$Database {
+public final class app/softwork/cloudkitclient/TestDatabase : app/softwork/cloudkitclient/Client$Database {
 	public static final field Companion Lapp/softwork/cloudkitclient/TestDatabase$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;Lkotlinx/datetime/Clock;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;Lkotlinx/datetime/Clock;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createToken (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -43,5 +43,17 @@ public class app/softwork/cloudkitclient/TestDatabase : app/softwork/cloudkitcli
 
 public final class app/softwork/cloudkitclient/TestDatabase$Companion {
 	public final fun getInitUser ()Lapp/softwork/cloudkitclient/UserRecord;
+}
+
+public final class app/softwork/cloudkitclient/TestStorage : app/softwork/cloudkitclient/Storage {
+	public fun <init> (Lapp/softwork/cloudkitclient/UserRecord;Ljava/util/Map;Lkotlinx/datetime/Clock;)V
+	public fun create (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public fun delete (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)V
+	public fun get (Ljava/lang/String;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public fun now (Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/TimeInformation;
+	public fun query (Lapp/softwork/cloudkitclient/Record$Information;Ljava/util/List;Ljava/util/List;)Ljava/util/List;
+	public fun randomChangeTag ()Ljava/lang/String;
+	public fun update (Lapp/softwork/cloudkitclient/Record;Lapp/softwork/cloudkitclient/Record$Information;)Lapp/softwork/cloudkitclient/Record;
+	public fun upload ([BLapp/softwork/cloudkitclient/Record$Information;Lkotlin/reflect/KProperty1;Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Asset;
 }
 
