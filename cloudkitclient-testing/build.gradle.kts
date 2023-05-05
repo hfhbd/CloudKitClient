@@ -10,7 +10,7 @@ kotlin {
             dependencies {
                 api(projects.cloudkitclientCore)
                 api("app.softwork:kotlinx-uuid-core:0.0.18")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
             }
         }
         commonTest {
