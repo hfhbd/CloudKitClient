@@ -10,16 +10,3 @@ dependencies {
     implementation("org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin:0.13.2")
     implementation("org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:1.8.20")
 }
-
-gradlePlugin {
-    plugins {
-        register("MyRepos") {
-            id = "MyRepos"
-            implementationClass = "MyRepos"
-        }
-        register("MPP") {
-            id = "mpp"
-            implementationClass = "MPP"
-        }
-    }
-}
