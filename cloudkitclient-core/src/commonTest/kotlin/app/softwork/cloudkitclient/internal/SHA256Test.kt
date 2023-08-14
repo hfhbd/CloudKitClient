@@ -1,5 +1,6 @@
 package app.softwork.cloudkitclient.internal
 
+import kotlinx.coroutines.test.*
 import kotlin.test.*
 
 internal class SHA256Test {

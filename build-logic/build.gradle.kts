@@ -3,12 +3,12 @@ plugins {
 }
 
 dependencies {
-    val kotlin = "1.9.0"
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-serialization:$kotlin")
-    implementation("app.cash.licensee:licensee-gradle-plugin:1.7.0")
-    implementation("org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin:0.13.2")
-    implementation("org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:1.8.20")
+    implementation(libs.plugins.kotlin.mpp.toDep())
+    implementation(libs.plugins.kotlin.serialization.toDep())
+    implementation(libs.plugins.licensee.toDep())
+    implementation(libs.plugins.binary.toDep())
+    implementation(libs.plugins.dokka.toDep())
+    implementation(libs.plugins.publish.toDep())
 }
 
 gradlePlugin {
@@ -18,4 +18,8 @@ gradlePlugin {
             implementationClass = "MPP"
         }
     }
+}
+
+fun Provider<PluginDependency>.toDep() = map {
+    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }
