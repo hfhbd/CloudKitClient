@@ -1,7 +1,7 @@
 plugins {
-    mpp
-    publish
-    licensee
+    id("mpp")
+    id("publish")
+    id("licensee")
 }
 
 kotlin {
@@ -20,7 +20,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting {
+        named("jvmMain") {
             dependencies {
                 api("io.ktor:ktor-client-cio:$ktorVersion")
             }

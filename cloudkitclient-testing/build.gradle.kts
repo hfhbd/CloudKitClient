@@ -1,7 +1,7 @@
 plugins {
-    mpp
-    publish
-    licensee
+    id("mpp")
+    id("publish")
+    id("licensee")
 }
 
 kotlin {

@@ -64,7 +64,7 @@ public final class app/softwork/cloudkitclient/Create : app/softwork/cloudkitcli
 	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Create;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Create;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/Create$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -95,7 +95,7 @@ public final class app/softwork/cloudkitclient/Delete : app/softwork/cloudkitcli
 	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Delete;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Delete;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/Delete$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -117,6 +117,7 @@ public final class app/softwork/cloudkitclient/Environment : java/lang/Enum {
 	public static final field Companion Lapp/softwork/cloudkitclient/Environment$Companion;
 	public static final field Development Lapp/softwork/cloudkitclient/Environment;
 	public static final field Production Lapp/softwork/cloudkitclient/Environment;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun toString ()Ljava/lang/String;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Environment;
 	public static fun values ()[Lapp/softwork/cloudkitclient/Environment;
@@ -148,7 +149,7 @@ public final class app/softwork/cloudkitclient/Error : java/lang/Exception {
 	public final fun getUuid ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Error;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Error;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Error$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -184,7 +185,7 @@ public final class app/softwork/cloudkitclient/Filter {
 	public final fun getFieldValue ()Lapp/softwork/cloudkitclient/values/Value;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Filter;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Filter;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Filter$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -231,6 +232,7 @@ public final class app/softwork/cloudkitclient/Filter$Comparator : java/lang/Enu
 	public static final field NOT_LIST_CONTAINS_ALL Lapp/softwork/cloudkitclient/Filter$Comparator;
 	public static final field NOT_LIST_CONTAINS_ANY Lapp/softwork/cloudkitclient/Filter$Comparator;
 	public static final field NOT_LIST_MEMBER_BEGINS_WITH Lapp/softwork/cloudkitclient/Filter$Comparator;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Filter$Comparator;
 	public static fun values ()[Lapp/softwork/cloudkitclient/Filter$Comparator;
 }
@@ -247,6 +249,7 @@ public final class app/softwork/cloudkitclient/Filter$SystemFieldNames : java/la
 	public static final field Parent Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
 	public static final field RecordName Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
 	public static final field Share Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getSystemFieldName ()Ljava/lang/String;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
 	public static fun values ()[Lapp/softwork/cloudkitclient/Filter$SystemFieldNames;
@@ -275,7 +278,7 @@ public final class app/softwork/cloudkitclient/Name {
 	public final fun getPhoneticRepresentation ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Name;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Name;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Name$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -319,7 +322,7 @@ public final class app/softwork/cloudkitclient/OperationsRequest {
 	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/OperationsRequest;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/OperationsRequest;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/OperationsRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -341,7 +344,7 @@ public final class app/softwork/cloudkitclient/PluginFields {
 	public static final field Companion Lapp/softwork/cloudkitclient/PluginFields$Companion;
 	public fun <init> ()V
 	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/PluginFields;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/PluginFields;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/PluginFields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -374,7 +377,7 @@ public final class app/softwork/cloudkitclient/Push$Create {
 	public final fun getApnsEnvironment ()Lapp/softwork/cloudkitclient/Environment;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Push$Create;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Push$Create;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Push$Create$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -407,7 +410,7 @@ public final class app/softwork/cloudkitclient/Push$Response {
 	public final fun getWebcourierURL ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Push$Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Push$Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Push$Response$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -465,7 +468,7 @@ public final class app/softwork/cloudkitclient/Response {
 	public final fun getRecords ()Ljava/util/List;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/Response$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -499,7 +502,7 @@ public final class app/softwork/cloudkitclient/Sort {
 	public final fun getRelativeLocation ()Lapp/softwork/cloudkitclient/types/Location;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Sort;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Sort;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Sort$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -540,7 +543,7 @@ public final class app/softwork/cloudkitclient/TimeInformation {
 	public final fun getUserRecordName ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/TimeInformation;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/TimeInformation;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/TimeInformation$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -571,7 +574,7 @@ public final class app/softwork/cloudkitclient/Update : app/softwork/cloudkitcli
 	public fun getRecord ()Lapp/softwork/cloudkitclient/Record;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Update;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Update;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/Update$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -621,7 +624,7 @@ public final class app/softwork/cloudkitclient/UserRecord : app/softwork/cloudki
 	public fun setModified (Lapp/softwork/cloudkitclient/TimeInformation;)V
 	public fun setRecordChangeTag (Ljava/lang/String;)V
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/UserRecord;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/UserRecord;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/UserRecord$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -657,7 +660,7 @@ public final class app/softwork/cloudkitclient/UserRecord$Fields : app/softwork/
 	public final fun getLastName ()Lapp/softwork/cloudkitclient/values/Value$String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Fields;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Fields;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/UserRecord$Fields$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -690,7 +693,7 @@ public final class app/softwork/cloudkitclient/UserRecord$Identity {
 	public final fun getUserRecordName ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Identity;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Identity;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/UserRecord$Identity$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -724,7 +727,7 @@ public final class app/softwork/cloudkitclient/UserRecord$Identity$LookupInfo {
 	public final fun getUserRecordName ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/UserRecord$Identity$LookupInfo;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/UserRecord$Identity$LookupInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -757,7 +760,7 @@ public final class app/softwork/cloudkitclient/Zone {
 	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/Zone;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/Zone;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/Zone$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -791,7 +794,7 @@ public final class app/softwork/cloudkitclient/ZoneID {
 	public final fun getZoneType ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/ZoneID;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/ZoneID;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/ZoneID$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -832,7 +835,7 @@ public final class app/softwork/cloudkitclient/types/Asset {
 	public final fun getWrappingKey ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -864,7 +867,7 @@ public final class app/softwork/cloudkitclient/types/Asset$Upload {
 	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$Upload$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -898,7 +901,7 @@ public final class app/softwork/cloudkitclient/types/Asset$Upload$Field {
 	public final fun getRecordType ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Field;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$Upload$Field$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -927,7 +930,7 @@ public final class app/softwork/cloudkitclient/types/Asset$Upload$Response {
 	public final fun getTokens ()Ljava/util/List;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -956,7 +959,7 @@ public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Singl
 	public final fun getSingleFile ()Lapp/softwork/cloudkitclient/types/Asset;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$SingleFile;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$SingleFile;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$SingleFile$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -989,7 +992,7 @@ public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Token
 	public final fun getUrl ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Asset$Upload$Response$Token;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Asset$Upload$Response$Token$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1032,7 +1035,7 @@ public final class app/softwork/cloudkitclient/types/Location {
 	public final fun getVerticalAccuracy ()D
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Location;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Location;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Location$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1066,7 +1069,7 @@ public final class app/softwork/cloudkitclient/types/Reference {
 	public final fun getZoneID ()Lapp/softwork/cloudkitclient/ZoneID;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/types/Reference;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/types/Reference;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1085,6 +1088,7 @@ public final class app/softwork/cloudkitclient/types/Reference$Action : java/lan
 	public static final field DeleteSelf Lapp/softwork/cloudkitclient/types/Reference$Action;
 	public static final field None Lapp/softwork/cloudkitclient/types/Reference$Action;
 	public static final field Validate Lapp/softwork/cloudkitclient/types/Reference$Action;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lapp/softwork/cloudkitclient/types/Reference$Action;
 	public static fun values ()[Lapp/softwork/cloudkitclient/types/Reference$Action;
 }
@@ -1100,7 +1104,7 @@ public final class app/softwork/cloudkitclient/types/Reference$Companion {
 public abstract class app/softwork/cloudkitclient/values/Value {
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Companion;
 	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Asset : app/softwork/cloudkitclient/values/Value {
@@ -1114,7 +1118,7 @@ public final class app/softwork/cloudkitclient/values/Value$Asset : app/softwork
 	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Asset;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Asset;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Asset;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Asset$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1142,7 +1146,7 @@ public final class app/softwork/cloudkitclient/values/Value$Byte : app/softwork/
 	public final fun getValue ()[B
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Byte;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Byte;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Byte$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1175,7 +1179,7 @@ public final class app/softwork/cloudkitclient/values/Value$DateTime : app/softw
 	public final fun getValue ()Lkotlinx/datetime/Instant;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$DateTime;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$DateTime;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$DateTime$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1204,7 +1208,7 @@ public final class app/softwork/cloudkitclient/values/Value$Double : app/softwor
 	public final fun getValue ()D
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Double;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Double;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Double$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1233,7 +1237,7 @@ public final class app/softwork/cloudkitclient/values/Value$List : app/softwork/
 	public final fun getValue ()Ljava/util/List;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$List;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$List;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$List$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1262,7 +1266,7 @@ public final class app/softwork/cloudkitclient/values/Value$Location : app/softw
 	public final fun getValue ()Lapp/softwork/cloudkitclient/types/Location;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Location;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Location;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Location$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1291,7 +1295,7 @@ public final class app/softwork/cloudkitclient/values/Value$Number : app/softwor
 	public final fun getValue ()J
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Number;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Number;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Number$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1321,7 +1325,7 @@ public final class app/softwork/cloudkitclient/values/Value$Reference : app/soft
 	public final fun getValue ()Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Reference;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Reference;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1350,7 +1354,7 @@ public final class app/softwork/cloudkitclient/values/Value$Reference$Ref {
 	public final fun getRecordName ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$Reference$Ref;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$Reference$Ref$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1379,7 +1383,7 @@ public final class app/softwork/cloudkitclient/values/Value$String : app/softwor
 	public final fun getValue ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
-	public static final fun write$Self (Lapp/softwork/cloudkitclient/values/Value$String;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+	public static final synthetic fun write$Self (Lapp/softwork/cloudkitclient/values/Value$String;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
 public final class app/softwork/cloudkitclient/values/Value$String$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
