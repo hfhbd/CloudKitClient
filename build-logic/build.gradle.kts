@@ -13,10 +13,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("MyRepos") {
-            id = "MyRepos"
-            implementationClass = "MyRepos"
-        }
         register("MPP") {
             id = "mpp"
             implementationClass = "MPP"

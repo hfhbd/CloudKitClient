@@ -1,8 +1,8 @@
 import java.util.*
 
 plugins {
-    `maven-publish`
-    signing
+    id("maven-publish")
+    id("signing")
 }
 
 val emptyJar by tasks.registering(Jar::class) { }
@@ -42,6 +42,8 @@ publishing {
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey?.let { String(Base64.getDecoder().decode(it)).trim() }, signingPassword)
-    sign(publishing.publications)
+    signingKey?.let {
+        useInMemoryPgpKeys(String(Base64.getDecoder().decode(it)).trim(), signingPassword)
+        sign(publishing.publications)
+    }
 }
