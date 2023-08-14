@@ -6,23 +6,22 @@ plugins {
 
 kotlin {
     sourceSets {
-        // Apache 2, https://github.com/ktorio/ktor/releases/latest
-        val ktorVersion = "2.3.3"
         commonMain {
             dependencies {
-                api("io.ktor:ktor-client-core:$ktorVersion")
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                api(libs.ktor.client.core)
+                api(libs.serialization.json)
+                api(libs.datetime)
             }
         }
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(libs.coroutines.test)
             }
         }
         named("jvmMain") {
             dependencies {
-                api("io.ktor:ktor-client-cio:$ktorVersion")
+                api(libs.ktor.client.cio)
             }
         }
     }
