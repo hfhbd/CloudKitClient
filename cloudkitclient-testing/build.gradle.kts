@@ -10,7 +10,6 @@ kotlin {
             dependencies {
                 api(projects.cloudkitclientCore)
                 api(libs.uuid)
-                api(libs.coroutines.test)
             }
         }
         commonTest {
