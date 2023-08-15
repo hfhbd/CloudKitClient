@@ -11,6 +11,7 @@ import io.ktor.http.*
 import kotlinx.datetime.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import kotlin.io.encoding.*
 import kotlin.reflect.*
 
 public class CKClient(
@@ -44,7 +45,7 @@ public class CKClient(
     public override val sharedDB: Database = Database("shared")
 
     override suspend fun download(assetToDownload: Asset): ByteArray =
-        httpClient { }.get(assetToDownload.downloadURL!!).readBytes()
+        client.get(assetToDownload.downloadURL!!).readBytes()
 
     public inner class Database internal constructor(internal val name: String) : Client.Database {
         public override suspend fun <F : Fields, R : Record<F>> query(
@@ -146,7 +147,7 @@ public class CKClient(
             }.let {
                 json.decodeFromString(Asset.Upload.Response.serializer(), it.bodyAsText())
             }.tokens.first().let {
-                httpClient { }.post(it.url) { setBody(asset) }.bodyAsText()
+                client.post(it.url) { setBody(asset) }.bodyAsText()
             }.let {
                 json.decodeFromString(Asset.Upload.Response.SingleFile.serializer(), it)
             }.singleFile
@@ -170,7 +171,8 @@ public class CKClient(
         val date = Clock.System.now().toString().dropLastWhile { it != '.' }.replace('.', 'Z')
         val body = json.encodeToString(serializer, requestBody())
         logging("request: $body")
-        val bodySignature = sha256(body).encodeBase64
+        @OptIn(ExperimentalEncodingApi::class)
+        val bodySignature = Base64.encode(sha256(body))
         val signature = ecdsa(privateECPrime256v1Key, "$date:$bodySignature:$subPath")
 
         url.takeFrom(subPath)

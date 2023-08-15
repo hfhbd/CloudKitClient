@@ -3,7 +3,9 @@ package app.softwork.cloudkitclient.internal
 import java.security.*
 import java.security.spec.*
 import kotlin.coroutines.*
+import kotlin.io.encoding.*
 
+@OptIn(ExperimentalEncodingApi::class)
 internal actual suspend fun ecdsa(key: ByteArray, data: String): String =
     suspendCoroutine { cont ->
         val keySpec = PKCS8EncodedKeySpec(key, "EC")
@@ -13,7 +15,7 @@ internal actual suspend fun ecdsa(key: ByteArray, data: String): String =
 
         signer.update(data.toByteArray())
         val signed = signer.sign()
-        val signedString = signed.encodeBase64
+        val signedString = Base64.encode(signed)
 
         cont.resume(signedString)
     }

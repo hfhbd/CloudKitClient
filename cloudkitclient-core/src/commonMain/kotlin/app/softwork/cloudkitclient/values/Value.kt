@@ -1,9 +1,9 @@
 package app.softwork.cloudkitclient.values
 
 import app.softwork.cloudkitclient.*
-import app.softwork.cloudkitclient.internal.*
 import kotlinx.datetime.*
 import kotlinx.serialization.*
+import kotlin.io.encoding.*
 
 @Serializable
 public sealed class Value {
@@ -18,8 +18,9 @@ public sealed class Value {
         @SerialName("value")
         private val base64Value: kotlin.String
     ) : Value() {
+        @OptIn(ExperimentalEncodingApi::class)
         val value: ByteArray
-            get() = base64Value.decodeBase64Bytes
+            get() = Base64.decode(base64Value)
     }
 
     @Serializable
