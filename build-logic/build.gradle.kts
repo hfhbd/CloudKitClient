@@ -11,15 +11,6 @@ dependencies {
     implementation(libs.plugins.publish.toDep())
 }
 
-gradlePlugin {
-    plugins {
-        register("MPP") {
-            id = "mpp"
-            implementationClass = "MPP"
-        }
-    }
-}
-
 fun Provider<PluginDependency>.toDep() = map {
     "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }
