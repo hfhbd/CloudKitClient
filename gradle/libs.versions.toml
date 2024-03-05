@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.22"
-ktor = "2.3.8"
+ktor = "2.3.9"
 
 [libraries]
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
