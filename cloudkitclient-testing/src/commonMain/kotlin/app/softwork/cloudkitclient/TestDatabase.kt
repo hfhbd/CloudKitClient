@@ -8,12 +8,13 @@ import app.softwork.cloudkitclient.Record.Information
 import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
 import kotlinx.datetime.*
-import kotlinx.uuid.*
 import kotlin.reflect.*
+import kotlin.uuid.*
 
+@OptIn(ExperimentalUuidApi::class)
 public class TestDatabase(
     public val name: String,
-    public val assets: MutableMap<UUID, Pair<Asset, ByteArray>>,
+    public val assets: MutableMap<Uuid, Pair<Asset, ByteArray>>,
     clock: Clock,
     public val zones: Map<ZoneID, Storage> = mapOf(ZoneID.default to TestStorage(initUser, assets, clock))
 ) : Database {
@@ -67,5 +68,5 @@ public class TestDatabase(
     ): Asset = zones[zoneID]!!.upload(asset, recordInformation, field, recordName)
 
     override suspend fun createToken(): Response =
-        Response(apnsEnvironment = Development, apnsToken = UUID().toString(), webcourierURL = "")
+        Response(apnsEnvironment = Development, apnsToken = Uuid.random().toString(), webcourierURL = "")
 }

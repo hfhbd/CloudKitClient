@@ -2,12 +2,13 @@ package app.softwork.cloudkitclient
 
 import app.softwork.cloudkitclient.values.*
 import kotlinx.datetime.*
-import kotlinx.uuid.*
 import kotlin.reflect.*
+import kotlin.uuid.*
 
+@OptIn(ExperimentalUuidApi::class)
 public class TestStorage(
     private val initUser: UserRecord,
-    private val assets: MutableMap<UUID, Pair<app.softwork.cloudkitclient.types.Asset, ByteArray>>,
+    private val assets: MutableMap<Uuid, Pair<app.softwork.cloudkitclient.types.Asset, ByteArray>>,
     private val clock: Clock
 ) : Storage {
 
@@ -17,7 +18,7 @@ public class TestStorage(
         create(initUser, UserRecord)
     }
 
-    public override fun randomChangeTag(): String = UUID().toString().take(8)
+    public override fun randomChangeTag(): String = Uuid.random().toString().take(8)
 
     public override fun now(
         userRecordName: String,
@@ -83,7 +84,7 @@ public class TestStorage(
         field: KProperty1<F, Value.Asset?>,
         recordName: String?
     ): app.softwork.cloudkitclient.types.Asset {
-        val download = UUID()
+        val download = Uuid.random()
         val asset = app.softwork.cloudkitclient.types.Asset(
             fileChecksum = "",
             size = content.size,
