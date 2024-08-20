@@ -7,7 +7,7 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.7.1" }
-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.0" }
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.1" }
 uuid = { module = "app.softwork:kotlinx-uuid-core", version = "0.1.1" }
 
 [plugins]
