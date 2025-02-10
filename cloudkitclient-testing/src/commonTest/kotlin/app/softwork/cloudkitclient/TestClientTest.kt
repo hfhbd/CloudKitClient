@@ -4,7 +4,6 @@ import kotlinx.datetime.*
 import kotlin.test.*
 import kotlin.time.*
 
-@ExperimentalTime
 class TestClientTest {
     @Test
     fun init() {
