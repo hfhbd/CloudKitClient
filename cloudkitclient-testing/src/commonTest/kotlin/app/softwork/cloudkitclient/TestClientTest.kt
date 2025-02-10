@@ -4,12 +4,11 @@ import kotlinx.datetime.*
 import kotlin.test.*
 import kotlin.time.*
 
-@ExperimentalTime
 class TestClientTest {
     @Test
     fun init() {
         val testTimeSource = TestTimeSource()
-        val client = TestClient(testTimeSource.toClock())
+        val client = TestClient(testTimeSource.asClock(origin = Instant.fromEpochSeconds(0)))
         assertEquals("public", client.publicDB.name)
         assertEquals("private", client.privateDB.name)
         assertEquals("shared", client.sharedDB.name)
@@ -34,7 +33,7 @@ class TestClientTest {
     @Test
     fun queryFound() {
         val testTimeSource = TestTimeSource()
-        val client = TestClient(testTimeSource.toClock())
+        val client = TestClient(testTimeSource.asClock(origin = Instant.fromEpochSeconds(0)))
         val defaultZone = client.publicDB.zones.values.first()
         val filter = Filter.Builder<UserRecord.Fields>().apply {
             UserRecord.Fields::firstName eq "Test"
@@ -49,7 +48,7 @@ class TestClientTest {
     @Test
     fun queryNotFound() {
         val testTimeSource = TestTimeSource()
-        val client = TestClient(testTimeSource.toClock())
+        val client = TestClient(testTimeSource.asClock(origin = Instant.fromEpochSeconds(0)))
         val defaultZone = client.publicDB.zones.values.first()
         val filter = Filter.Builder<UserRecord.Fields>().apply {
             UserRecord.Fields::firstName eq "Foo"
@@ -59,11 +58,5 @@ class TestClientTest {
         }.build()
         val results = defaultZone.query(UserRecord, filter, sort)
         assertEquals(0, results.size)
-    }
-
-    @ExperimentalTime
-    private fun TimeSource.toClock(offset: Instant = Instant.fromEpochSeconds(0)): Clock = object : Clock {
-        private val startMark: TimeMark = markNow()
-        override fun now() = offset + startMark.elapsedNow()
     }
 }
