@@ -6,6 +6,7 @@ dependencies {
     implementation(libs.plugins.kotlin.jvm.toDep())
     implementation(libs.plugins.kotlin.serialization.toDep())
     implementation(libs.plugins.licensee.toDep())
+    implementation(libs.plugins.mavencentral.toDep())
     implementation(libs.plugins.binary.toDep())
     implementation(libs.plugins.dokka.toDep())
 }
