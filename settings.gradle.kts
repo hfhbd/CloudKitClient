@@ -28,5 +28,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "cloudkitclient"
 
-include(":cloudkitclient-core")
-include(":cloudkitclient-testing")
+include(":core")

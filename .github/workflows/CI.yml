@@ -9,16 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    env:
-      GRADLE_OPTS: -Dorg.gradle.caching=true
 
     steps:
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          dependency-graph: generate-and-submit
-      - name: Build all modules with Gradle
+
+      - name: Build with Gradle
         run: ./gradlew build

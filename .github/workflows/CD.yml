@@ -4,22 +4,28 @@ on:
   release:
     types: [ created ]
 
+concurrency:
+  group: "cd"
+  cancel-in-progress: false
+
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
-    env:
-      GRADLE_OPTS: -Dorg.gradle.caching=true
+    environment:
+      name: CD
 
     steps:
-      - uses: actions/checkout@v4
       - name: Set environment for version
-        run: long="${{ github.ref }}"; version=${long#"refs/tags/v"}; echo "version=${version}" >> $GITHUB_ENV
+        run: long="${{ github.ref }}"; version=${long#"refs/tags/v"}; echo "version=${version}" >> $GITHUB_OUTPUT
+        id: version
+      - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
+
       - name: Publish
-        run: ./gradlew -Pversion=$version -Dorg.gradle.parallel=false publish closeAndReleaseStagingRepositories
+        run: ./gradlew -Pversion=${{ steps.version.outputs.version }} publish
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONARTYPE_APIKEY }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONARTYPE_APITOKEN }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CENTRAL_PASSWORD }}

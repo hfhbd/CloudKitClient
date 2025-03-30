@@ -1,17 +1,15 @@
 # CloudKitClient
 
-This Kotlin library allows you to access your Apple CloudKit public database from your server. This library uses the
-serverKey authentication.
-
-## Stability
-
-This library uses experimental Kotlin libraries, so binary, source and semantic stability cannot be provided!
+This Kotlin library allows you to access your Apple CloudKit public database from your server.
+This library uses the serverKey authentication.
 
 ## Supported Server Platforms
 
 - JVM
-- nodeJS (currently not available)
-- Native (currently not available)
+
+### Unsupported Server Platforms
+- nodeJS
+- Native
 
 ## Other Client Platforms
 
@@ -25,9 +23,10 @@ Currently, the public and the private databases are supported.
 
 ## Key Generation
 
-CloudKit requires an ECDSA keypair with the prime parameter. The public key is uploaded to the iCloud dashboard, which
-returns the `keyID`. The private key is used to sign your requests. To generate the private key using the JVM supported
-PKCS8 format, use the following commands:
+CloudKit requires an ECDSA keypair with the prime parameter.
+The public key is uploaded to the iCloud dashboard, which returns the `keyID`.
+The private key is used to sign your requests.
+To generate the private key using the JVM supported PKCS8 format, use the following commands:
 
 ```
 openssl ecparam -name prime256v1 -out gen.pem -genkey -noout
