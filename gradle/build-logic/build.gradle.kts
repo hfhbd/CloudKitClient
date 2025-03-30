@@ -8,7 +8,6 @@ dependencies {
     implementation(libs.plugins.licensee.toDep())
     implementation(libs.plugins.binary.toDep())
     implementation(libs.plugins.dokka.toDep())
-    implementation(libs.plugins.publish.toDep())
 }
 
 fun Provider<PluginDependency>.toDep() = map {

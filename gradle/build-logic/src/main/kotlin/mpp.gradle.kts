@@ -10,6 +10,7 @@ kotlin {
     compilerOptions {
         allWarningsAsErrors.set(true)
         progressiveMode.set(true)
+        optIn.add("kotlin.time.ExperimentalTime")
     }
 
     jvmToolchain(11)
