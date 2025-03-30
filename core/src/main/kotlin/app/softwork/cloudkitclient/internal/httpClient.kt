@@ -4,5 +4,5 @@ import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.engine.java.Java
 
-internal actual fun httpClient(config: HttpClientConfig<out HttpClientEngineConfig>.() -> Unit) =
+internal fun httpClient(config: HttpClientConfig<out HttpClientEngineConfig>.() -> Unit) =
     HttpClient(Java, config)

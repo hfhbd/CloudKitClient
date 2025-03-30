@@ -1,8 +1,10 @@
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
     kotlin("plugin.serialization")
     id("org.jetbrains.kotlinx.binary-compatibility-validator")
     id("org.jetbrains.dokka")
+    id("java-test-fixtures")
+    id("jvm-test-suite")
 }
 
 kotlin {
@@ -14,6 +16,13 @@ kotlin {
     }
 
     jvmToolchain(11)
+}
 
-    jvm()
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+testing.suites.withType(JvmTestSuite::class).configureEach {
+    useKotlinTest()
 }

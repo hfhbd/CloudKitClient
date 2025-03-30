@@ -1,5 +1,11 @@
-package app.softwork.cloudkitclient
+package cloudkitclient
 
+import app.softwork.cloudkitclient.Filter
+import app.softwork.cloudkitclient.Sort
+import app.softwork.cloudkitclient.TestClient
+import app.softwork.cloudkitclient.TestDatabase
+import app.softwork.cloudkitclient.UserRecord
+import app.softwork.cloudkitclient.ZoneID
 import kotlin.test.*
 import kotlin.time.*
 
@@ -18,7 +24,7 @@ class TestClientTest {
                 assertTrue(ZoneID.default in zones.keys)
                 val zone = zones.values.first()
                 assertEquals(
-                    listOf(TestDatabase.initUser), 
+                    listOf(TestDatabase.initUser),
                     zone.query(
                         UserRecord,
                         emptyList(),

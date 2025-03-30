@@ -6,7 +6,7 @@ import kotlin.coroutines.*
 import kotlin.io.encoding.*
 
 @OptIn(ExperimentalEncodingApi::class)
-internal actual suspend fun ecdsa(key: ByteArray, data: String): String =
+internal suspend fun ecdsa(key: ByteArray, data: String): String =
     suspendCoroutine { cont ->
         val keySpec = PKCS8EncodedKeySpec(key, "EC")
         val signer = Signature.getInstance("SHA256withECDSA")

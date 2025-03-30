@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.plugins.kotlin.mpp.toDep())
+    implementation(libs.plugins.kotlin.jvm.toDep())
     implementation(libs.plugins.kotlin.serialization.toDep())
     implementation(libs.plugins.licensee.toDep())
     implementation(libs.plugins.binary.toDep())

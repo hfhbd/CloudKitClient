@@ -1,18 +1,11 @@
-import java.util.*
-
 plugins {
     id("maven-publish")
     id("signing")
 }
 
-val emptyJar by tasks.registering(Jar::class) { }
-
 publishing {
     publications.configureEach {
         this as MavenPublication
-        artifact(emptyJar) {
-            classifier = "javadoc"
-        }
         pom {
             name.set("app.softwork CloudKit Client Library")
             description.set("A multiplatform Kotlin library to use Apple CloudKit")
@@ -40,18 +33,11 @@ publishing {
 }
 
 signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    signingKey?.let {
-        useInMemoryPgpKeys(String(Base64.getDecoder().decode(it)).trim(), signingPassword)
+    val signingKey = providers.gradleProperty("signingKey")
+    if (signingKey.isPresent) {
+        useInMemoryPgpKeys(signingKey.get(), providers.gradleProperty("signingPassword").get())
         sign(publishing.publications)
     }
-}
-
-// https://youtrack.jetbrains.com/issue/KT-46466
-val signingTasks = tasks.withType<Sign>()
-tasks.withType<AbstractPublishToMaven>().configureEach {
-    dependsOn(signingTasks)
 }
 
 tasks.withType<AbstractArchiveTask>().configureEach {

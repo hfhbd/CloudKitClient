@@ -9,7 +9,7 @@ ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.8.0" }
 
 [plugins]
-kotlin-mpp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin"}
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 licensee = { id = "app.cash.licensee", version = "1.12.0" }
 binary = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.17.0" }
