@@ -1,8 +1,8 @@
 package app.softwork.cloudkitclient
 
 import app.softwork.cloudkitclient.values.*
-import kotlin.time.*
 import kotlin.reflect.*
+import kotlin.time.*
 import kotlin.uuid.*
 
 @OptIn(ExperimentalUuidApi::class)
@@ -131,7 +131,9 @@ public class TestStorage(
                 }
             }
             it.sortedWith(comparator)
-        } else it
+        } else {
+            it
+        }
     }
 
     private fun <F : Record.Fields, R : Record<F>> List<KProperty1<F, Value?>>.sort(

@@ -1,6 +1,6 @@
 package app.softwork.cloudkitclient
 
-import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
 
 @Serializable
 public enum class Environment {

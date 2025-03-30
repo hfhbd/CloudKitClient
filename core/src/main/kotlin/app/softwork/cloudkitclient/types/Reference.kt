@@ -1,7 +1,9 @@
 package app.softwork.cloudkitclient.types
 
-import app.softwork.cloudkitclient.*
-import kotlinx.serialization.*
+import app.softwork.cloudkitclient.Record
+import app.softwork.cloudkitclient.ZoneID
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Serializable
 public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(

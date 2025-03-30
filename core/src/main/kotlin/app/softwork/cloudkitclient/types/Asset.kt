@@ -1,7 +1,7 @@
 package app.softwork.cloudkitclient.types
 
-import app.softwork.cloudkitclient.*
-import kotlinx.serialization.*
+import app.softwork.cloudkitclient.ZoneID
+import kotlinx.serialization.Serializable
 
 @Serializable
 public data class Asset(

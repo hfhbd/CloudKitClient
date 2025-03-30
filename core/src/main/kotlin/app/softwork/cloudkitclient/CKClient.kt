@@ -1,18 +1,31 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.*
-import app.softwork.cloudkitclient.internal.*
-import app.softwork.cloudkitclient.types.*
-import app.softwork.cloudkitclient.values.*
+import app.softwork.cloudkitclient.Record.Fields
+import app.softwork.cloudkitclient.Record.Information
+import app.softwork.cloudkitclient.internal.ecdsa
+import app.softwork.cloudkitclient.internal.httpClient
+import app.softwork.cloudkitclient.internal.sha256
+import app.softwork.cloudkitclient.types.Asset
+import app.softwork.cloudkitclient.values.Value
 import io.ktor.client.call.body
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-import kotlin.io.encoding.*
-import kotlin.reflect.*
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.request
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpMethod
+import io.ktor.http.URLProtocol
+import io.ktor.http.takeFrom
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+import kotlin.reflect.KProperty1
 import kotlin.time.Clock
 
 public class CKClient(
@@ -81,7 +94,6 @@ public class CKClient(
                 OperationsRequest(operations = listOf(Create(record = record)))
             }.toResponse(recordInformation).single()
 
-
         override suspend fun <F : Fields, R : Record<F>> read(
             recordName: String,
             recordInformation: Information<F, R>,
@@ -93,10 +105,9 @@ public class CKClient(
                     zoneID = zoneID
                 )
             }.toResponse(recordInformation).single()
-        } catch (error: Error) {
+        } catch (error: CKError) {
             if (error.serverErrorCode == "NOT_FOUND") null else throw error
         }
-
 
         public override suspend fun <F : Fields, R : Record<F>> update(
             record: R,
@@ -135,24 +146,24 @@ public class CKClient(
             field: KProperty1<F, Value.Asset?>,
             recordName: String?,
             zoneID: ZoneID
-        ): Asset =
-            request("/assets/upload", Asset.Upload.serializer()) {
-                Asset.Upload(
-                    tokens = listOf(
-                        Asset.Upload.Field(
-                            fieldName = field.name,
-                            recordInformation.recordType,
-                            recordName = recordName
-                        )
-                    ), zoneID = zoneID
-                )
-            }.let {
-                json.decodeFromString(Asset.Upload.Response.serializer(), it.bodyAsText())
-            }.tokens.first().let {
-                client.post(it.url) { setBody(asset) }.bodyAsText()
-            }.let {
-                json.decodeFromString(Asset.Upload.Response.SingleFile.serializer(), it)
-            }.singleFile
+        ): Asset = request("/assets/upload", Asset.Upload.serializer()) {
+            Asset.Upload(
+                tokens = listOf(
+                    Asset.Upload.Field(
+                        fieldName = field.name,
+                        recordInformation.recordType,
+                        recordName = recordName
+                    )
+                ),
+                zoneID = zoneID
+            )
+        }.let {
+            json.decodeFromString(Asset.Upload.Response.serializer(), it.bodyAsText())
+        }.tokens.first().let {
+            client.post(it.url) { setBody(asset) }.bodyAsText()
+        }.let {
+            json.decodeFromString(Asset.Upload.Response.SingleFile.serializer(), it)
+        }.singleFile
 
         override suspend fun createToken(): Push.Response = request("/tokens/create", Push.Create.serializer()) {
             Push.Create(environment)
@@ -183,7 +194,6 @@ public class CKClient(
         setBody(body)
     }
 
-
     private suspend fun <F : Fields, R : Record<F>> HttpResponse.toResponse(
         recordInformation: Information<F, R>
     ): List<R> {
@@ -194,14 +204,14 @@ public class CKClient(
                 Response.serializer(
                     recordInformation.fieldsSerializer(),
                     recordInformation.serializer()
-                ), body
+                ),
+                body
             ).records
-
         } catch (error: SerializationException) {
             throw json.decodeFromString(ResponseError.serializer(), body).records.firstOrNull() ?: throw error
         }
     }
 
     @Serializable
-    private data class ResponseError(val records: List<Error>)
+    private data class ResponseError(val records: List<CKError>)
 }

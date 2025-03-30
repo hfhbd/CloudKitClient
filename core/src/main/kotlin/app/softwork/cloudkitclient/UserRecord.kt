@@ -1,10 +1,11 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.*
-import app.softwork.cloudkitclient.values.*
-import app.softwork.cloudkitclient.values.Value.String.*
-import kotlinx.serialization.*
-import kotlin.reflect.*
+import app.softwork.cloudkitclient.Record.Information
+import app.softwork.cloudkitclient.values.Value
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.reflect.KProperty1
 
 @Serializable
 public data class UserRecord(
@@ -39,7 +40,6 @@ public data class UserRecord(
         public val emailAddress: Value.String?
     ) : Record.Fields
 
-
     /**
      * A dictionary that identifies a user with the following keys.
      */
@@ -50,7 +50,7 @@ public data class UserRecord(
          * A dictionary used to lookup user information.
          * @param emailAddress A string representing user’s email address.
          * @param phoneNumber A string representing user’s phone number.
-         * @param userRecordName The record name field in the associated [User] record.
+         * @param userRecordName The record name field in the associated [UserRecord] record.
          */
         @Serializable
         public data class LookupInfo(

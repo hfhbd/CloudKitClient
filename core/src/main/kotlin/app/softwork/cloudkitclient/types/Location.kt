@@ -3,9 +3,9 @@
 package app.softwork.cloudkitclient.types
 
 import app.softwork.cloudkitclient.serializer.InstantEpochSecondsSerializer
-import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import kotlin.time.Instant
 
 @Serializable
 public data class Location(

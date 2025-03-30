@@ -8,6 +8,7 @@ dependencies {
     implementation(libs.plugins.licensee.toDep())
     implementation(libs.plugins.mavencentral.toDep())
     implementation(libs.plugins.binary.toDep())
+    implementation(libs.plugins.detekt.toDep())
     implementation(libs.plugins.dokka.toDep())
 }
 

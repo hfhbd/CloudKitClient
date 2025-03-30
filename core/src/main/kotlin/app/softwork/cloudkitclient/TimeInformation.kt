@@ -2,9 +2,10 @@
 
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.serializer.*
+import app.softwork.cloudkitclient.serializer.InstantEpochSecondsSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import kotlin.time.Instant
-import kotlinx.serialization.*
 
 @Serializable
 public data class TimeInformation(

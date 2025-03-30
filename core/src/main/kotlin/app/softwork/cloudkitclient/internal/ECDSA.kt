@@ -1,9 +1,12 @@
 package app.softwork.cloudkitclient.internal
 
-import java.security.*
-import java.security.spec.*
-import kotlin.coroutines.*
-import kotlin.io.encoding.*
+import java.security.KeyFactory
+import java.security.Signature
+import java.security.spec.PKCS8EncodedKeySpec
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
 internal suspend fun ecdsa(key: ByteArray, data: String): String =

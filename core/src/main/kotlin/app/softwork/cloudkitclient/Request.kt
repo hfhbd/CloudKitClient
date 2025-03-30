@@ -1,6 +1,6 @@
 package app.softwork.cloudkitclient
 
-import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class Request(
