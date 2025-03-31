@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.1.20"
-ktor = "2.3.12"
+ktor = "3.1.2"
 
 [libraries]
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -11,7 +11,7 @@ serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-jso
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
-mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.15" }
+mavencentral = { id = "io.github.hfhbd.mavencentral", version = "0.0.17" }
 licensee = { id = "app.cash.licensee", version = "1.13.0" }
 binary = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.17.0" }
 dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }

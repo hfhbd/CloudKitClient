@@ -4,6 +4,7 @@ import app.softwork.cloudkitclient.Record.*
 import app.softwork.cloudkitclient.internal.*
 import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
+import io.ktor.client.call.body
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -46,7 +47,7 @@ public class CKClient(
     public override val sharedDB: Database = Database("shared")
 
     override suspend fun download(assetToDownload: Asset): ByteArray =
-        client.get(assetToDownload.downloadURL!!).readBytes()
+        client.get(assetToDownload.downloadURL!!).body()
 
     public inner class Database internal constructor(internal val name: String) : Client.Database {
         public override suspend fun <F : Fields, R : Record<F>> query(
