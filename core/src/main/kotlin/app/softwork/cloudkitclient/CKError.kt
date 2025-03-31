@@ -3,7 +3,7 @@ package app.softwork.cloudkitclient
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class Error(
+public data class CKError(
     val recordName: String? = null,
     val reason: String,
     val serverErrorCode: String,

@@ -1,10 +1,10 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.values.*
-import kotlinx.serialization.*
-import kotlin.reflect.*
+import app.softwork.cloudkitclient.values.Value
+import kotlinx.serialization.KSerializer
+import kotlin.reflect.KProperty1
 
-public interface Record<F: Record.Fields> {
+public interface Record<F : Record.Fields> {
     /**
      * The unique record ID. Often an UUID
      */
@@ -22,7 +22,7 @@ public interface Record<F: Record.Fields> {
 
     public val zoneID: ZoneID
 
-    public interface Information<F: Fields, R : Record<F>> {
+    public interface Information<F : Fields, R : Record<F>> {
         /**
          * The static recordType
          */
@@ -34,7 +34,6 @@ public interface Record<F: Record.Fields> {
 
         public fun fields(): List<KProperty1<F, Value?>>
     }
-
 
     public interface Fields
 }

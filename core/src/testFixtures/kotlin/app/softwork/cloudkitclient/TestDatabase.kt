@@ -7,8 +7,8 @@ import app.softwork.cloudkitclient.Record.Fields
 import app.softwork.cloudkitclient.Record.Information
 import app.softwork.cloudkitclient.types.*
 import app.softwork.cloudkitclient.values.*
-import kotlin.time.*
 import kotlin.reflect.*
+import kotlin.time.*
 import kotlin.uuid.*
 
 @OptIn(ExperimentalUuidApi::class)
@@ -21,10 +21,10 @@ public class TestDatabase(
 
     public companion object {
         public val initUser: UserRecord = UserRecord(
-            recordName = "TestUser", 
+            recordName = "TestUser",
             fields = UserRecord.Fields(
                 firstName = Value.String("Test"),
-                lastName = Value.String("User"), 
+                lastName = Value.String("User"),
                 emailAddress = null
             )
         )

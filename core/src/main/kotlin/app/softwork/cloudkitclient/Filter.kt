@@ -1,8 +1,8 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.values.*
-import kotlinx.serialization.*
-import kotlin.reflect.*
+import app.softwork.cloudkitclient.values.Value
+import kotlinx.serialization.Serializable
+import kotlin.reflect.KProperty1
 
 @Serializable
 public data class Filter(
@@ -21,7 +21,6 @@ public data class Filter(
         ModificationTime("___modTime", "modifiedTimestamp"),
         ModifiedBy("___modifiedBy", "modifiedUserRecordName")
     }
-
 
     @Serializable
     public enum class Comparator {
@@ -55,7 +54,9 @@ public data class Filter(
         public infix fun <TF : Record.Fields, TR : Record<TF>> KProperty1<F, Value.Reference<TF, TR>>.eq(value: TR) {
             filters.add(
                 Filter(
-                    fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.Reference(
+                    fieldName = name,
+                    comparator = Comparator.EQUALS,
+                    fieldValue = Value.Reference(
                         Value.Reference.Ref<TF, TR>(value.recordName)
                     )
                 )

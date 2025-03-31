@@ -1,9 +1,11 @@
 package app.softwork.cloudkitclient.values
 
-import app.softwork.cloudkitclient.*
+import app.softwork.cloudkitclient.Record
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.time.Instant
-import kotlinx.serialization.*
-import kotlin.io.encoding.*
 
 @Serializable
 public sealed class Value {
@@ -27,7 +29,6 @@ public sealed class Value {
     @SerialName("LOCATION")
     public data class Location(val value: app.softwork.cloudkitclient.types.Location) : Value()
 
-
     @Serializable
     @SerialName("DOUBLE")
     public data class Double(val value: kotlin.Double) : Value()
@@ -36,23 +37,20 @@ public sealed class Value {
     @SerialName("INT")
     public data class Number(val value: Long) : Value()
 
-
     @Serializable
     @SerialName("REFERENCE")
     public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
         val value: Ref<F, TargetRecord>
     ) : Value() {
-        public constructor(record: TargetRecord): this(Ref(recordName = record.recordName))
+        public constructor(record: TargetRecord) : this(Ref(recordName = record.recordName))
 
         @Serializable
         public data class Ref<F : Record.Fields, TargetRecord : Record<F>>(val recordName: kotlin.String)
     }
 
-
     @Serializable
     @SerialName("STRING")
     public data class String(val value: kotlin.String) : Value()
-
 
     @Serializable
     @SerialName("DATETIME")
@@ -61,7 +59,6 @@ public sealed class Value {
 
         public constructor(instant: Instant) : this(instant.toEpochMilliseconds())
     }
-
 
     @Serializable
     @SerialName("LIST")

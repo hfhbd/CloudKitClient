@@ -1,10 +1,11 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.*
-import app.softwork.cloudkitclient.Sort.*
-import app.softwork.cloudkitclient.types.*
-import app.softwork.cloudkitclient.values.*
-import kotlin.reflect.*
+import app.softwork.cloudkitclient.Record.Fields
+import app.softwork.cloudkitclient.Record.Information
+import app.softwork.cloudkitclient.Sort.Builder
+import app.softwork.cloudkitclient.types.Asset
+import app.softwork.cloudkitclient.values.Value
+import kotlin.reflect.KProperty1
 
 public interface Client {
     public val logging: (String) -> Unit

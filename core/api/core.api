@@ -27,6 +27,43 @@ public final class app/softwork/cloudkitclient/CKClient$Database : app/softwork/
 	public fun upload ([BLapp/softwork/cloudkitclient/Record$Information;Lkotlin/reflect/KProperty1;Ljava/lang/String;Lapp/softwork/cloudkitclient/ZoneID;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public final class app/softwork/cloudkitclient/CKError : java/lang/Exception {
+	public static final field Companion Lapp/softwork/cloudkitclient/CKError$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/CKError;
+	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/CKError;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/CKError;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Ljava/lang/String;
+	public final fun getRecordName ()Ljava/lang/String;
+	public final fun getRedirectURL ()Ljava/lang/String;
+	public final fun getRetryAfter ()Ljava/lang/Integer;
+	public final fun getServerErrorCode ()Ljava/lang/String;
+	public final fun getUuid ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class app/softwork/cloudkitclient/CKError$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/CKError$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/CKError;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/CKError;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+}
+
+public final class app/softwork/cloudkitclient/CKError$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public abstract interface class app/softwork/cloudkitclient/Client {
 	public abstract fun download (Lapp/softwork/cloudkitclient/types/Asset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getLogging ()Lkotlin/jvm/functions/Function1;
@@ -120,43 +157,6 @@ public final class app/softwork/cloudkitclient/Environment : java/lang/Enum {
 }
 
 public final class app/softwork/cloudkitclient/Environment$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class app/softwork/cloudkitclient/Error : java/lang/Exception {
-	public static final field Companion Lapp/softwork/cloudkitclient/Error$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/lang/String;
-	public final fun component3 ()Ljava/lang/String;
-	public final fun component4 ()Ljava/lang/Integer;
-	public final fun component5 ()Ljava/lang/String;
-	public final fun component6 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;)Lapp/softwork/cloudkitclient/Error;
-	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/Error;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/Error;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getReason ()Ljava/lang/String;
-	public final fun getRecordName ()Ljava/lang/String;
-	public final fun getRedirectURL ()Ljava/lang/String;
-	public final fun getRetryAfter ()Ljava/lang/Integer;
-	public final fun getServerErrorCode ()Ljava/lang/String;
-	public final fun getUuid ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public synthetic class app/softwork/cloudkitclient/Error$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lapp/softwork/cloudkitclient/Error$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/Error;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/Error;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-}
-
-public final class app/softwork/cloudkitclient/Error$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
