@@ -1,9 +1,8 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.Fields
 import app.softwork.cloudkitclient.Record.Information
 import app.softwork.cloudkitclient.values.Value.Asset
-import kotlin.reflect.*
+import kotlin.reflect.KProperty1
 
 public interface Storage {
     public fun randomChangeTag(): String
@@ -12,23 +11,23 @@ public interface Storage {
         deviceID: String = "Testing"
     ): TimeInformation
 
-    public fun <F : Fields, R : Record<F>> create(record: R, recordInformation: Information<F, R>): R
-    public fun <F : Fields, R : Record<F>> get(
+    public fun <Fields, R : Record<Fields>> create(record: R, recordInformation: Information<Fields, R>): R
+    public fun <Fields, R : Record<Fields>> get(
         recordName: String,
-        recordInformation: Information<F, R>
+        recordInformation: Information<Fields, R>
     ): R?
 
-    public fun <F : Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>)
-    public fun <F : Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R
-    public fun <F : Fields, R : Record<F>> upload(
+    public fun <Fields, R : Record<Fields>> delete(record: R, recordInformation: Information<Fields, R>)
+    public fun <Fields, R : Record<Fields>> update(record: R, recordInformation: Information<Fields, R>): R
+    public fun <Fields, R : Record<Fields>> upload(
         content: ByteArray,
-        recordInformation: Information<F, R>,
-        field: KProperty1<F, Asset?>,
+        recordInformation: Information<Fields, R>,
+        field: KProperty1<Fields, Asset?>,
         recordName: String?
     ): app.softwork.cloudkitclient.types.Asset
 
-    public fun <F : Fields, R : Record<F>> query(
-        recordInformation: Information<F, R>,
+    public fun <Fields, R : Record<Fields>> query(
+        recordInformation: Information<Fields, R>,
         filters: List<Filter>,
         sorts: List<Sort>
     ): List<R>

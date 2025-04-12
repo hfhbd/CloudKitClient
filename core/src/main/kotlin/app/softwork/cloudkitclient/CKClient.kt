@@ -1,6 +1,5 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.Fields
 import app.softwork.cloudkitclient.Record.Information
 import app.softwork.cloudkitclient.internal.ecdsa
 import app.softwork.cloudkitclient.internal.httpClient
@@ -63,25 +62,25 @@ public class CKClient(
         client.get(assetToDownload.downloadURL!!).body()
 
     public inner class Database internal constructor(internal val name: String) : Client.Database {
-        public override suspend fun <F : Fields, R : Record<F>> query(
-            recordInformation: Information<F, R>,
+        public override suspend fun <Fields, R : Record<Fields>> query(
+            recordInformation: Information<Fields, R>,
             zoneID: ZoneID,
-            sort: Sort.Builder<F>.() -> Unit,
-            filter: Filter.Builder<F>.() -> Unit
+            sort: Sort.Builder<Fields>.() -> Unit,
+            filter: Filter.Builder<Fields>.() -> Unit
         ): List<R> = request("/records/query", Request.serializer()) {
             Request(
                 zoneID = zoneID,
                 query = Query(
                     recordType = recordInformation.recordType,
-                    filterBy = Filter.Builder<F>().apply(filter).build(),
-                    sortBy = Sort.Builder<F>().apply(sort).build()
+                    filterBy = Filter.Builder<Fields>().apply(filter).build(),
+                    sortBy = Sort.Builder<Fields>().apply(sort).build()
                 )
             )
         }.toResponse(recordInformation)
 
-        public override suspend fun <F : Fields, R : Record<F>> create(
+        public override suspend fun <Fields, R : Record<Fields>> create(
             record: R,
-            recordInformation: Information<F, R>
+            recordInformation: Information<Fields, R>
         ): R =
             request(
                 "/records/modify",
@@ -94,9 +93,9 @@ public class CKClient(
                 OperationsRequest(operations = listOf(Create(record = record)))
             }.toResponse(recordInformation).single()
 
-        override suspend fun <F : Fields, R : Record<F>> read(
+        override suspend fun <Fields, R : Record<Fields>> read(
             recordName: String,
-            recordInformation: Information<F, R>,
+            recordInformation: Information<Fields, R>,
             zoneID: ZoneID
         ): R? = try {
             request("/records/lookup", Request.RecordLookup.serializer()) {
@@ -109,9 +108,9 @@ public class CKClient(
             if (error.serverErrorCode == "NOT_FOUND") null else throw error
         }
 
-        public override suspend fun <F : Fields, R : Record<F>> update(
+        public override suspend fun <Fields, R : Record<Fields>> update(
             record: R,
-            recordInformation: Information<F, R>
+            recordInformation: Information<Fields, R>
         ): R =
             request(
                 "/records/modify",
@@ -124,9 +123,9 @@ public class CKClient(
                 OperationsRequest(operations = listOf(Update(record = record)))
             }.toResponse(recordInformation).single()
 
-        public override suspend fun <F : Fields, R : Record<F>> delete(
+        public override suspend fun <Fields, R : Record<Fields>> delete(
             record: R,
-            recordInformation: Information<F, R>
+            recordInformation: Information<Fields, R>
         ) {
             request(
                 "/records/modify",
@@ -140,10 +139,10 @@ public class CKClient(
             }
         }
 
-        override suspend fun <F : Fields, R : Record<F>> upload(
+        override suspend fun <Fields, R : Record<Fields>> upload(
             asset: ByteArray,
-            recordInformation: Information<F, R>,
-            field: KProperty1<F, Value.Asset?>,
+            recordInformation: Information<Fields, R>,
+            field: KProperty1<Fields, Value.Asset?>,
             recordName: String?,
             zoneID: ZoneID
         ): Asset = request("/assets/upload", Asset.Upload.serializer()) {
@@ -194,8 +193,8 @@ public class CKClient(
         setBody(body)
     }
 
-    private suspend fun <F : Fields, R : Record<F>> HttpResponse.toResponse(
-        recordInformation: Information<F, R>
+    private suspend fun <Fields, R : Record<Fields>> HttpResponse.toResponse(
+        recordInformation: Information<Fields, R>
     ): List<R> {
         val body = bodyAsText()
         logging("response ($status): $body")

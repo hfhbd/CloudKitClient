@@ -1,9 +1,9 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.types.*
-import kotlin.time.*
-import kotlin.uuid.*
+import app.softwork.cloudkitclient.types.Asset
+import kotlin.time.Clock
 import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 public class TestClient(clock: Clock) : Client {

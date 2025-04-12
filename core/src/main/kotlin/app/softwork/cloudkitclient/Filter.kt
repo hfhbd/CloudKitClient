@@ -45,19 +45,19 @@ public data class Filter(
         NOT_LIST_CONTAINS_ALL
     }
 
-    public class Builder<F : Record.Fields> {
+    public class Builder<Fields> {
 
-        public infix fun KProperty1<F, Value.String?>.eq(value: String) {
+        public infix fun KProperty1<Fields, Value.String?>.eq(value: String) {
             filters.add(Filter(fieldName = name, comparator = Comparator.EQUALS, fieldValue = Value.String(value)))
         }
 
-        public infix fun <TF : Record.Fields, TR : Record<TF>> KProperty1<F, Value.Reference<TF, TR>>.eq(value: TR) {
+        public infix fun <TFields, TR : Record<TFields>> KProperty1<Fields, Value.Reference<TFields, TR>>.eq(value: TR) {
             filters.add(
                 Filter(
                     fieldName = name,
                     comparator = Comparator.EQUALS,
                     fieldValue = Value.Reference(
-                        Value.Reference.Ref<TF, TR>(value.recordName)
+                        Value.Reference.Ref<TFields, TR>(value.recordName)
                     )
                 )
             )

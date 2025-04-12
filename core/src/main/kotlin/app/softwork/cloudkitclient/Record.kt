@@ -4,14 +4,14 @@ import app.softwork.cloudkitclient.values.Value
 import kotlinx.serialization.KSerializer
 import kotlin.reflect.KProperty1
 
-public interface Record<F : Record.Fields> {
+public interface Record<Fields> {
     /**
-     * The unique record ID. Often an UUID
+     * The unique record ID. Often a UUID
      */
     public val recordName: String
     public val recordType: String
 
-    public val fields: F
+    public val fields: Fields
 
     public val pluginFields: PluginFields
 
@@ -22,18 +22,17 @@ public interface Record<F : Record.Fields> {
 
     public val zoneID: ZoneID
 
-    public interface Information<F : Fields, R : Record<F>> {
+    public interface Information<Fields, R : Record<Fields>> {
         /**
          * The static recordType
          */
         public val recordType: String
+            get() = serializer().descriptor.serialName
 
         public fun serializer(): KSerializer<R>
 
-        public fun fieldsSerializer(): KSerializer<F>
+        public fun fieldsSerializer(): KSerializer<Fields>
 
-        public fun fields(): List<KProperty1<F, Value?>>
+        public fun fields(): List<KProperty1<Fields, Value?>>
     }
-
-    public interface Fields
 }

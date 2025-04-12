@@ -3,13 +3,13 @@ package app.softwork.cloudkitclient
 import app.softwork.cloudkitclient.Client.Database
 import app.softwork.cloudkitclient.Environment.Development
 import app.softwork.cloudkitclient.Push.Response
-import app.softwork.cloudkitclient.Record.Fields
 import app.softwork.cloudkitclient.Record.Information
-import app.softwork.cloudkitclient.types.*
-import app.softwork.cloudkitclient.values.*
-import kotlin.reflect.*
-import kotlin.time.*
-import kotlin.uuid.*
+import app.softwork.cloudkitclient.types.Asset
+import app.softwork.cloudkitclient.values.Value
+import kotlin.reflect.KProperty1
+import kotlin.time.Clock
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 public class TestDatabase(
@@ -30,7 +30,7 @@ public class TestDatabase(
         )
     }
 
-    public override suspend fun <F : Fields, R : Record<F>> query(
+    public override suspend fun <F, R : Record<F>> query(
         recordInformation: Information<F, R>,
         zoneID: ZoneID,
         sort: Sort.Builder<F>.() -> Unit,
@@ -41,25 +41,25 @@ public class TestDatabase(
         Sort.Builder<F>().apply(sort).build()
     )
 
-    private val <F : Fields, R : Record<F>> R.zone: Storage get() = zones[zoneID] ?: error("Zone $zoneID not found")
+    private val <F, R : Record<F>> R.zone: Storage get() = zones[zoneID] ?: error("Zone $zoneID not found")
 
-    override suspend fun <F : Fields, R : Record<F>> create(record: R, recordInformation: Information<F, R>): R =
+    override suspend fun <F, R : Record<F>> create(record: R, recordInformation: Information<F, R>): R =
         record.zone.create(record, recordInformation)
 
-    override suspend fun <F : Fields, R : Record<F>> read(
+    override suspend fun <F, R : Record<F>> read(
         recordName: String,
         recordInformation: Information<F, R>,
         zoneID: ZoneID
     ): R? = zones[zoneID]!!.get(recordName, recordInformation)
 
-    override suspend fun <F : Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R =
+    override suspend fun <F, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R =
         record.zone.update(record, recordInformation)
 
-    override suspend fun <F : Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>) {
+    override suspend fun <F, R : Record<F>> delete(record: R, recordInformation: Information<F, R>) {
         record.zone.delete(record, recordInformation)
     }
 
-    override suspend fun <F : Fields, R : Record<F>> upload(
+    override suspend fun <F, R : Record<F>> upload(
         asset: ByteArray,
         recordInformation: Information<F, R>,
         field: KProperty1<F, Value.Asset?>,

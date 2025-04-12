@@ -1,13 +1,11 @@
-package cloudkitclient
+package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Filter
-import app.softwork.cloudkitclient.Sort
-import app.softwork.cloudkitclient.TestClient
-import app.softwork.cloudkitclient.TestDatabase
-import app.softwork.cloudkitclient.UserRecord
-import app.softwork.cloudkitclient.ZoneID
-import kotlin.test.*
-import kotlin.time.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+import kotlin.time.Instant
+import kotlin.time.TestTimeSource
+import kotlin.time.asClock
 
 class TestClientTest {
     @Test
@@ -63,11 +61,5 @@ class TestClientTest {
         }.build()
         val results = defaultZone.query(UserRecord, filter, sort)
         assertEquals(0, results.size)
-    }
-
-    // https://youtrack.jetbrains.com/issue/KT-76394/kotlin.time.TimeSource.asClock-missing
-    private fun TimeSource.asClock(origin: Instant): Clock = object : Clock {
-        private val startMark: TimeMark = markNow()
-        override fun now() = origin + startMark.elapsedNow()
     }
 }

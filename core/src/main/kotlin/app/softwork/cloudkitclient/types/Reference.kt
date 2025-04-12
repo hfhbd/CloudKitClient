@@ -1,12 +1,11 @@
 package app.softwork.cloudkitclient.types
 
-import app.softwork.cloudkitclient.Record
 import app.softwork.cloudkitclient.ZoneID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
+public data class Reference(
     val recordName: String,
     val zoneID: ZoneID? = null,
     val action: Action

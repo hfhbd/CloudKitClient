@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:TestStorage.kt$TestStorage$private fun Value.check(filter: Filter): Boolean</ID>
+    <ID>LongMethod:TestStorage.kt$TestStorage$private fun Value.check(filter: Filter): Boolean</ID>
+    <ID>MagicNumber:TestStorage.kt$TestStorage$8</ID>
+    <ID>MaxLineLength:Filter.kt$Filter.Builder$public infix</ID>
+    <ID>MaximumLineLength:Filter.kt$Filter.Builder$ </ID>
+    <ID>NestedBlockDepth:TestStorage.kt$TestStorage$public override fun &lt;F, R : Record&lt;F>> query( recordInformation: Record.Information&lt;F, R>, filters: List&lt;Filter>, sorts: List&lt;Sort> ): List&lt;R></ID>
+    <ID>TooManyFunctions:TestStorage.kt$TestStorage : Storage</ID>
+  </CurrentIssues>
+</SmellBaseline>

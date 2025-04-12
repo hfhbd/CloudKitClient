@@ -31,7 +31,9 @@ public sealed class Value {
 
     @Serializable
     @SerialName("DOUBLE")
-    public data class Double(val value: kotlin.Double) : Value()
+    public data class Double(val value: kotlin.Double) : Value(), Comparable<Double> {
+        override fun compareTo(other: Double): Int = value.compareTo(other.value)
+    }
 
     @Serializable
     @SerialName("INT")
@@ -39,25 +41,29 @@ public sealed class Value {
 
     @Serializable
     @SerialName("REFERENCE")
-    public data class Reference<F : Record.Fields, TargetRecord : Record<F>>(
-        val value: Ref<F, TargetRecord>
+    public data class Reference<Fields, TargetRecord : Record<Fields>>(
+        val value: Ref<Fields, TargetRecord>
     ) : Value() {
         public constructor(record: TargetRecord) : this(Ref(recordName = record.recordName))
 
         @Serializable
-        public data class Ref<F : Record.Fields, TargetRecord : Record<F>>(val recordName: kotlin.String)
+        public data class Ref<Fields, TargetRecord : Record<Fields>>(val recordName: kotlin.String)
     }
 
     @Serializable
     @SerialName("STRING")
-    public data class String(val value: kotlin.String) : Value()
+    public data class String(val value: kotlin.String) : Value(), Comparable<String> {
+        override fun compareTo(other: String): Int = value.compareTo(other.value)
+    }
 
     @Serializable
     @SerialName("DATETIME")
-    public data class DateTime(@SerialName("value") private val milliseconds: Long) : Value() {
+    public data class DateTime(@SerialName("value") private val milliseconds: Long) : Value(), Comparable<DateTime> {
         public val value: Instant get() = Instant.fromEpochMilliseconds(milliseconds)
 
         public constructor(instant: Instant) : this(instant.toEpochMilliseconds())
+
+        override fun compareTo(other: DateTime): Int = value.compareTo(other.value)
     }
 
     @Serializable

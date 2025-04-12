@@ -1,9 +1,10 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.values.*
-import kotlin.reflect.*
-import kotlin.time.*
-import kotlin.uuid.*
+import app.softwork.cloudkitclient.values.Value
+import kotlin.reflect.KProperty1
+import kotlin.time.Clock
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 public class TestStorage(
@@ -29,9 +30,9 @@ public class TestStorage(
         deviceID = deviceID
     )
 
-    public override fun <F : Record.Fields, R : Record<F>> create(
+    public override fun <Fields, R : Record<Fields>> create(
         record: R,
-        recordInformation: Record.Information<F, R>
+        recordInformation: Record.Information<Fields, R>
     ): R {
         val changeTag = randomChangeTag()
         val now = now(initUser.recordName)
@@ -42,9 +43,9 @@ public class TestStorage(
         return record
     }
 
-    public override fun <F : Record.Fields, R : Record<F>> get(
+    public override fun <Fields, R : Record<Fields>> get(
         recordName: String,
-        recordInformation: Record.Information<F, R>
+        recordInformation: Record.Information<Fields, R>
     ): R? {
         return storage[recordName]?.let {
             @Suppress("UNCHECKED_CAST")
@@ -52,9 +53,9 @@ public class TestStorage(
         }
     }
 
-    public override fun <F : Record.Fields, R : Record<F>> delete(
+    public override fun <Fields, R : Record<Fields>> delete(
         record: R,
-        recordInformation: Record.Information<F, R>
+        recordInformation: Record.Information<Fields, R>
     ) {
         val key = record.recordName
         val oldRecord = storage[key]
@@ -63,9 +64,9 @@ public class TestStorage(
         storage.remove(key)
     }
 
-    public override fun <F : Record.Fields, R : Record<F>> update(
+    public override fun <Fields, R : Record<Fields>> update(
         record: R,
-        recordInformation: Record.Information<F, R>
+        recordInformation: Record.Information<Fields, R>
     ): R {
         val oldRecord = storage[record.recordName]
         requireNotNull(oldRecord)
@@ -78,7 +79,7 @@ public class TestStorage(
         return record
     }
 
-    public override fun <F : Record.Fields, R : Record<F>> upload(
+    public override fun <F, R : Record<F>> upload(
         content: ByteArray,
         recordInformation: Record.Information<F, R>,
         field: KProperty1<F, Value.Asset?>,
@@ -96,7 +97,7 @@ public class TestStorage(
         return asset
     }
 
-    public override fun <F : Record.Fields, R : Record<F>> query(
+    public override fun <F, R : Record<F>> query(
         recordInformation: Record.Information<F, R>,
         filters: List<Filter>,
         sorts: List<Sort>
@@ -136,39 +137,22 @@ public class TestStorage(
         }
     }
 
-    private fun <F : Record.Fields, R : Record<F>> List<KProperty1<F, Value?>>.sort(
+    private fun <F, R : Record<F>> List<KProperty1<F, Value?>>.sort(
         sort: Sort,
         record: R
-    ): Comparable<Value>? = single {
+    ): Comparable<*>? = single {
         it.name == sort.fieldName
     }.get(record.fields)?.asComparable()
 
-    private fun Value.asComparable(): Comparable<Value> {
-        return when (this) {
-            is Value.Double -> comparable {
-                require(it is Value.Double)
-                value.compareTo(it.value)
-            }
+    private fun Value.asComparable(): Comparable<*> = when (this) {
+        is Value.Double -> this
+        is Value.String -> this
+        is Value.DateTime -> this
 
-            is Value.String -> comparable {
-                require(it is Value.String)
-                value.compareTo(it.value)
-            }
-
-            is Value.DateTime -> comparable {
-                require(it is Value.DateTime)
-                value.compareTo(it.value)
-            }
-
-            else -> error("Not comparable")
-        }
+        else -> error("Not comparable")
     }
 
-    private fun <T> T.comparable(comparing: T.(T) -> Int): Comparable<T> = object : Comparable<T> {
-        override fun compareTo(other: T): Int = comparing(other)
-    }
-
-    private fun <F : Record.Fields> List<KProperty1<F, Value?>>.value(
+    private fun <F> List<KProperty1<F, Value?>>.value(
         fields: F,
         filter: Filter
     ): Value {

@@ -1,6 +1,5 @@
 package app.softwork.cloudkitclient
 
-import app.softwork.cloudkitclient.Record.Fields
 import app.softwork.cloudkitclient.Record.Information
 import app.softwork.cloudkitclient.Sort.Builder
 import app.softwork.cloudkitclient.types.Asset
@@ -17,27 +16,27 @@ public interface Client {
     public val sharedDB: Database
 
     public interface Database {
-        public suspend fun <F : Fields, R : Record<F>> query(
-            recordInformation: Information<F, R>,
+        public suspend fun <Fields, R : Record<Fields>> query(
+            recordInformation: Information<Fields, R>,
             zoneID: ZoneID = ZoneID.default,
-            sort: Builder<F>.() -> Unit = { },
-            filter: Filter.Builder<F>.() -> Unit = { }
+            sort: Builder<Fields>.() -> Unit = { },
+            filter: Filter.Builder<Fields>.() -> Unit = { }
         ): List<R>
 
-        public suspend fun <F : Fields, R : Record<F>> create(record: R, recordInformation: Information<F, R>): R
-        public suspend fun <F : Fields, R : Record<F>> read(
+        public suspend fun <Fields, R : Record<Fields>> create(record: R, recordInformation: Information<Fields, R>): R
+        public suspend fun <Fields, R : Record<Fields>> read(
             recordName: String,
-            recordInformation: Information<F, R>,
+            recordInformation: Information<Fields, R>,
             zoneID: ZoneID = ZoneID.default
         ): R?
 
-        public suspend fun <F : Fields, R : Record<F>> update(record: R, recordInformation: Information<F, R>): R
-        public suspend fun <F : Fields, R : Record<F>> delete(record: R, recordInformation: Information<F, R>)
+        public suspend fun <Fields, R : Record<Fields>> update(record: R, recordInformation: Information<Fields, R>): R
+        public suspend fun <Fields, R : Record<Fields>> delete(record: R, recordInformation: Information<Fields, R>)
 
-        public suspend fun <F : Fields, R : Record<F>> upload(
+        public suspend fun <Fields, R : Record<Fields>> upload(
             asset: ByteArray,
-            recordInformation: Information<F, R>,
-            field: KProperty1<F, Value.Asset?>,
+            recordInformation: Information<Fields, R>,
+            field: KProperty1<Fields, Value.Asset?>,
             recordName: String?,
             zoneID: ZoneID = ZoneID.default
         ): Asset

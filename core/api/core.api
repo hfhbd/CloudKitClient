@@ -416,7 +416,7 @@ public final class app/softwork/cloudkitclient/Push$Response$Companion {
 public abstract interface class app/softwork/cloudkitclient/Record {
 	public abstract fun getCreated ()Lapp/softwork/cloudkitclient/TimeInformation;
 	public abstract fun getDeleted ()Ljava/lang/Boolean;
-	public abstract fun getFields ()Lapp/softwork/cloudkitclient/Record$Fields;
+	public abstract fun getFields ()Ljava/lang/Object;
 	public abstract fun getModified ()Lapp/softwork/cloudkitclient/TimeInformation;
 	public abstract fun getPluginFields ()Lapp/softwork/cloudkitclient/PluginFields;
 	public abstract fun getRecordChangeTag ()Ljava/lang/String;
@@ -429,14 +429,15 @@ public abstract interface class app/softwork/cloudkitclient/Record {
 	public abstract fun setRecordChangeTag (Ljava/lang/String;)V
 }
 
-public abstract interface class app/softwork/cloudkitclient/Record$Fields {
-}
-
 public abstract interface class app/softwork/cloudkitclient/Record$Information {
 	public abstract fun fields ()Ljava/util/List;
 	public abstract fun fieldsSerializer ()Lkotlinx/serialization/KSerializer;
-	public abstract fun getRecordType ()Ljava/lang/String;
+	public fun getRecordType ()Ljava/lang/String;
 	public abstract fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class app/softwork/cloudkitclient/Record$Information$DefaultImpls {
+	public static fun getRecordType (Lapp/softwork/cloudkitclient/Record$Information;)Ljava/lang/String;
 }
 
 public final class app/softwork/cloudkitclient/Response {
@@ -586,8 +587,8 @@ public final class app/softwork/cloudkitclient/UserRecord : app/softwork/cloudki
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getCreated ()Lapp/softwork/cloudkitclient/TimeInformation;
 	public fun getDeleted ()Ljava/lang/Boolean;
-	public synthetic fun getFields ()Lapp/softwork/cloudkitclient/Record$Fields;
 	public fun getFields ()Lapp/softwork/cloudkitclient/UserRecord$Fields;
+	public synthetic fun getFields ()Ljava/lang/Object;
 	public fun getModified ()Lapp/softwork/cloudkitclient/TimeInformation;
 	public fun getPluginFields ()Lapp/softwork/cloudkitclient/PluginFields;
 	public fun getRecordChangeTag ()Ljava/lang/String;
@@ -620,7 +621,7 @@ public final class app/softwork/cloudkitclient/UserRecord$Companion : app/softwo
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/UserRecord$Fields : app/softwork/cloudkitclient/Record$Fields {
+public final class app/softwork/cloudkitclient/UserRecord$Fields {
 	public static final field Companion Lapp/softwork/cloudkitclient/UserRecord$Fields$Companion;
 	public fun <init> (Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;Lapp/softwork/cloudkitclient/values/Value$String;)V
 	public final fun component1 ()Lapp/softwork/cloudkitclient/values/Value$String;
@@ -1022,14 +1023,14 @@ public final class app/softwork/cloudkitclient/types/Reference {
 }
 
 public final synthetic class app/softwork/cloudkitclient/types/Reference$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public fun <init> (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)V
+	public static final field INSTANCE Lapp/softwork/cloudkitclient/types/Reference$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lapp/softwork/cloudkitclient/types/Reference;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lapp/softwork/cloudkitclient/types/Reference;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public final fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$Action : java/lang/Enum {
@@ -1047,7 +1048,7 @@ public final class app/softwork/cloudkitclient/types/Reference$Action$Companion 
 }
 
 public final class app/softwork/cloudkitclient/types/Reference$Companion {
-	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public abstract class app/softwork/cloudkitclient/values/Value {
@@ -1113,10 +1114,12 @@ public final class app/softwork/cloudkitclient/values/Value$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/values/Value$DateTime : app/softwork/cloudkitclient/values/Value {
+public final class app/softwork/cloudkitclient/values/Value$DateTime : app/softwork/cloudkitclient/values/Value, java/lang/Comparable {
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$DateTime$Companion;
 	public fun <init> (J)V
 	public fun <init> (Lkotlin/time/Instant;)V
+	public fun compareTo (Lapp/softwork/cloudkitclient/values/Value$DateTime;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public final fun copy (J)Lapp/softwork/cloudkitclient/values/Value$DateTime;
 	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$DateTime;JILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$DateTime;
 	public fun equals (Ljava/lang/Object;)Z
@@ -1140,9 +1143,11 @@ public final class app/softwork/cloudkitclient/values/Value$DateTime$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/values/Value$Double : app/softwork/cloudkitclient/values/Value {
+public final class app/softwork/cloudkitclient/values/Value$Double : app/softwork/cloudkitclient/values/Value, java/lang/Comparable {
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$Double$Companion;
 	public fun <init> (D)V
+	public fun compareTo (Lapp/softwork/cloudkitclient/values/Value$Double;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public final fun component1 ()D
 	public final fun copy (D)Lapp/softwork/cloudkitclient/values/Value$Double;
 	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$Double;DILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$Double;
@@ -1303,9 +1308,11 @@ public final class app/softwork/cloudkitclient/values/Value$Reference$Ref$Compan
 	public final fun serializer (Lkotlinx/serialization/KSerializer;Lkotlinx/serialization/KSerializer;)Lkotlinx/serialization/KSerializer;
 }
 
-public final class app/softwork/cloudkitclient/values/Value$String : app/softwork/cloudkitclient/values/Value {
+public final class app/softwork/cloudkitclient/values/Value$String : app/softwork/cloudkitclient/values/Value, java/lang/Comparable {
 	public static final field Companion Lapp/softwork/cloudkitclient/values/Value$String$Companion;
 	public fun <init> (Ljava/lang/String;)V
+	public fun compareTo (Lapp/softwork/cloudkitclient/values/Value$String;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public final fun component1 ()Ljava/lang/String;
 	public final fun copy (Ljava/lang/String;)Lapp/softwork/cloudkitclient/values/Value$String;
 	public static synthetic fun copy$default (Lapp/softwork/cloudkitclient/values/Value$String;Ljava/lang/String;ILjava/lang/Object;)Lapp/softwork/cloudkitclient/values/Value$String;

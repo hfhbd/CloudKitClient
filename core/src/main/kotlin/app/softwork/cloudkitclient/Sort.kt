@@ -22,18 +22,18 @@ public data class Sort(
     val ascending: Boolean = true,
     val relativeLocation: Location? = null
 ) {
-    public class Builder<F : Record.Fields> {
+    public class Builder<Fields> {
         private val sortedBy = mutableListOf<Sort>()
 
-        public fun ascending(value: KProperty1<F, Value?>) {
+        public fun ascending(value: KProperty1<Fields, Value?>) {
             sortedBy.add(Sort(value.name, ascending = true))
         }
 
-        public fun descending(value: KProperty1<F, Value?>) {
+        public fun descending(value: KProperty1<Fields, Value?>) {
             sortedBy.add(Sort(value.name, ascending = false))
         }
 
-        public infix fun KProperty1<F, Value.Location?>.relativeToLocation(to: Location) {
+        public infix fun KProperty1<Fields, Value.Location?>.relativeToLocation(to: Location) {
             sortedBy.add(Sort(fieldName = name, ascending = true, relativeLocation = to))
         }
 
