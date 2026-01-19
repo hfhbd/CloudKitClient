@@ -5,8 +5,7 @@ plugins {
 }
 
 publishing {
-    publications.configureEach {
-        this as MavenPublication
+    publications.withType<MavenPublication>().configureEach {
         pom {
             name.set("app.softwork CloudKit Client Library")
             description.set("A multiplatform Kotlin library to use Apple CloudKit")
@@ -34,16 +33,10 @@ publishing {
 }
 
 signing {
-    val signingKey = providers.gradleProperty("signingKey")
-    if (signingKey.isPresent) {
-        useInMemoryPgpKeys(signingKey.get(), providers.gradleProperty("signingPassword").get())
-        sign(publishing.publications)
-    }
-}
-
-tasks.withType<AbstractArchiveTask>().configureEach {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
-    filePermissions {}
-    dirPermissions {}
+    useInMemoryPgpKeys(
+        providers.gradleProperty("signingKey").orNull,
+        providers.gradleProperty("signingPassword").orNull,
+    )
+    isRequired = providers.gradleProperty("signingKey").isPresent
+    sign(publishing.publications)
 }
